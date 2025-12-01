@@ -1,0 +1,612 @@
+<!DOCTYPE html>
+
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sushi House RD - Menú Online</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+```
+    body {
+        font-family: 'Arial', sans-serif;
+        background-color: #000;
+        color: #fff;
+        min-height: 100vh;
+    }
+    
+    header {
+        background: linear-gradient(135deg, #ff0000, #cc0000);
+        padding: 20px;
+        text-align: center;
+        box-shadow: 0 4px 6px rgba(255,0,0,0.3);
+    }
+    
+    .logo {
+        max-width: 300px;
+        margin: 0 auto;
+    }
+    
+    .container {
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 20px;
+    }
+    
+    .cart-summary {
+        position: sticky;
+        top: 20px;
+        background: #1a1a1a;
+        border: 2px solid #ff0000;
+        border-radius: 15px;
+        padding: 20px;
+        margin-bottom: 30px;
+        box-shadow: 0 4px 15px rgba(255,0,0,0.3);
+    }
+    
+    .cart-summary h2 {
+        color: #ff0000;
+        margin-bottom: 15px;
+        font-size: 24px;
+    }
+    
+    .cart-items {
+        max-height: 200px;
+        overflow-y: auto;
+        margin-bottom: 15px;
+    }
+    
+    .cart-item {
+        display: flex;
+        justify-content: space-between;
+        padding: 8px 0;
+        border-bottom: 1px solid #333;
+    }
+    
+    .cart-total {
+        font-size: 28px;
+        color: #ff0000;
+        font-weight: bold;
+        text-align: right;
+        margin-top: 15px;
+        padding-top: 15px;
+        border-top: 2px solid #ff0000;
+    }
+    
+    .section {
+        background: #1a1a1a;
+        border-radius: 15px;
+        padding: 25px;
+        margin-bottom: 30px;
+        border: 1px solid #333;
+    }
+    
+    .section-title {
+        color: #ff0000;
+        font-size: 32px;
+        margin-bottom: 25px;
+        text-align: center;
+        text-transform: uppercase;
+        letter-spacing: 2px;
+    }
+    
+    .menu-item {
+        background: #0a0a0a;
+        border: 2px solid #ff0000;
+        border-radius: 10px;
+        padding: 20px;
+        margin-bottom: 20px;
+        transition: transform 0.3s, box-shadow 0.3s;
+    }
+    
+    .menu-item:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 8px 20px rgba(255,0,0,0.4);
+    }
+    
+    .item-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 10px;
+    }
+    
+    .item-name {
+        font-size: 20px;
+        font-weight: bold;
+        color: #fff;
+    }
+    
+    .item-price {
+        font-size: 24px;
+        color: #ff0000;
+        font-weight: bold;
+    }
+    
+    .item-description {
+        color: #ccc;
+        margin-bottom: 15px;
+        font-size: 14px;
+    }
+    
+    .item-controls {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+    }
+    
+    .quantity-control {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        background: #000;
+        padding: 5px 10px;
+        border-radius: 8px;
+        border: 1px solid #ff0000;
+    }
+    
+    .quantity-btn {
+        background: #ff0000;
+        color: #fff;
+        border: none;
+        width: 30px;
+        height: 30px;
+        border-radius: 50%;
+        cursor: pointer;
+        font-size: 18px;
+        font-weight: bold;
+        transition: background 0.3s;
+    }
+    
+    .quantity-btn:hover {
+        background: #cc0000;
+    }
+    
+    .quantity-display {
+        min-width: 30px;
+        text-align: center;
+        font-size: 18px;
+        font-weight: bold;
+    }
+    
+    .add-btn {
+        background: #ff0000;
+        color: #fff;
+        border: none;
+        padding: 10px 25px;
+        border-radius: 8px;
+        cursor: pointer;
+        font-size: 16px;
+        font-weight: bold;
+        transition: background 0.3s;
+        flex: 1;
+    }
+    
+    .add-btn:hover {
+        background: #cc0000;
+    }
+    
+    .checkout-section {
+        position: sticky;
+        bottom: 0;
+        background: #1a1a1a;
+        padding: 20px;
+        border-top: 3px solid #ff0000;
+        text-align: center;
+    }
+    
+    .customer-name {
+        width: 100%;
+        max-width: 400px;
+        padding: 15px;
+        margin-bottom: 15px;
+        border: 2px solid #ff0000;
+        border-radius: 8px;
+        background: #000;
+        color: #fff;
+        font-size: 16px;
+    }
+    
+    .delivery-option {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 10px;
+        margin-bottom: 15px;
+        font-size: 18px;
+    }
+    
+    .delivery-option input[type="checkbox"] {
+        width: 24px;
+        height: 24px;
+        cursor: pointer;
+        accent-color: #ff0000;
+    }
+    
+    .delivery-option label {
+        cursor: pointer;
+        user-select: none;
+    }
+    
+    .delivery-price {
+        color: #ff0000;
+        font-weight: bold;
+    }
+    
+    .whatsapp-btn {
+        background: #25D366;
+        color: #fff;
+        border: none;
+        padding: 18px 40px;
+        border-radius: 10px;
+        cursor: pointer;
+        font-size: 20px;
+        font-weight: bold;
+        transition: all 0.3s;
+        box-shadow: 0 4px 15px rgba(37,211,102,0.4);
+    }
+    
+    .whatsapp-btn:hover {
+        background: #128C7E;
+        transform: scale(1.05);
+    }
+    
+    .whatsapp-btn:disabled {
+        background: #666;
+        cursor: not-allowed;
+        transform: scale(1);
+    }
+    
+    .empty-cart {
+        text-align: center;
+        color: #666;
+        padding: 20px;
+    }
+    
+    @media (max-width: 768px) {
+        .container {
+            padding: 10px;
+        }
+        
+        .section-title {
+            font-size: 24px;
+        }
+        
+        .item-name {
+            font-size: 18px;
+        }
+    }
+</style>
+```
+
+</head>
+<body>
+    <header>
+        <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 500 200'%3E%3Crect fill='none' width='500' height='200'/%3E%3Ctext x='250' y='100' font-family='Arial Black' font-size='60' fill='%23ff4444' text-anchor='middle' font-weight='bold'%3ESUSHI HOUSE RD%3C/text%3E%3Ctext x='250' y='150' font-family='Arial' font-size='30' fill='white' text-anchor='middle'%3E丼工大吉%3C/text%3E%3C/svg%3E" alt="Sushi House RD" class="logo">
+    </header>
+
+```
+<div class="container">
+    <div class="cart-summary">
+        <h2>🛒 Tu Carrito</h2>
+        <div id="cartItems" class="cart-items">
+            <div class="empty-cart">Tu carrito está vacío</div>
+        </div>
+        <div class="cart-total">
+            Total: $<span id="totalPrice">0</span>
+        </div>
+    </div>
+
+    <div class="section">
+        <h2 class="section-title">🍣 Nuestros Rolls</h2>
+        
+        <div class="menu-item" data-id="1">
+            <div class="item-header">
+                <span class="item-name">1. Chicken Madurito Roll</span>
+                <span class="item-price">$400</span>
+            </div>
+            <div class="item-description">Plátano maduro, aguacate y pollo</div>
+            <div class="item-controls">
+                <div class="quantity-control">
+                    <button class="quantity-btn minus">-</button>
+                    <span class="quantity-display">0</span>
+                    <button class="quantity-btn plus">+</button>
+                </div>
+                <button class="add-btn">Agregar al Carrito</button>
+            </div>
+        </div>
+
+        <div class="menu-item" data-id="2">
+            <div class="item-header">
+                <span class="item-name">2. Chicken Madurito Roll Fried</span>
+                <span class="item-price">$450</span>
+            </div>
+            <div class="item-description">Plátano maduro, aguacate, pollo (rollo empanizado)</div>
+            <div class="item-controls">
+                <div class="quantity-control">
+                    <button class="quantity-btn minus">-</button>
+                    <span class="quantity-display">0</span>
+                    <button class="quantity-btn plus">+</button>
+                </div>
+                <button class="add-btn">Agregar al Carrito</button>
+            </div>
+        </div>
+
+        <div class="menu-item" data-id="3">
+            <div class="item-header">
+                <span class="item-name">3. Shrimp Supreme Roll</span>
+                <span class="item-price">$450</span>
+            </div>
+            <div class="item-description">Camarón, queso crema, zanahoria, pepino</div>
+            <div class="item-controls">
+                <div class="quantity-control">
+                    <button class="quantity-btn minus">-</button>
+                    <span class="quantity-display">0</span>
+                    <button class="quantity-btn plus">+</button>
+                </div>
+                <button class="add-btn">Agregar al Carrito</button>
+            </div>
+        </div>
+
+        <div class="menu-item" data-id="4">
+            <div class="item-header">
+                <span class="item-name">4. Shrimp Supreme Roll Fried</span>
+                <span class="item-price">$500</span>
+            </div>
+            <div class="item-description">Camarón cocido, queso crema, zanahoria, pepino (Rollo empanizado)</div>
+            <div class="item-controls">
+                <div class="quantity-control">
+                    <button class="quantity-btn minus">-</button>
+                    <span class="quantity-display">0</span>
+                    <button class="quantity-btn plus">+</button>
+                </div>
+                <button class="add-btn">Agregar al Carrito</button>
+            </div>
+        </div>
+
+        <div class="menu-item" data-id="5">
+            <div class="item-header">
+                <span class="item-name">5. Sushi Burguer ⭐ Especial de la Casa</span>
+                <span class="item-price">$400</span>
+            </div>
+            <div class="item-description">Carne angus, bacon, pepino, salsa Fuji</div>
+            <div class="item-controls">
+                <div class="quantity-control">
+                    <button class="quantity-btn minus">-</button>
+                    <span class="quantity-display">0</span>
+                    <button class="quantity-btn plus">+</button>
+                </div>
+                <button class="add-btn">Agregar al Carrito</button>
+            </div>
+        </div>
+
+        <div class="menu-item" data-id="6">
+            <div class="item-header">
+                <span class="item-name">6. Sushi Burguer Fried</span>
+                <span class="item-price">$450</span>
+            </div>
+            <div class="item-description">Carne angus, bacon, pepino, salsa Fuji (rollo empanizado)</div>
+            <div class="item-controls">
+                <div class="quantity-control">
+                    <button class="quantity-btn minus">-</button>
+                    <span class="quantity-display">0</span>
+                    <button class="quantity-btn plus">+</button>
+                </div>
+                <button class="add-btn">Agregar al Carrito</button>
+            </div>
+        </div>
+
+        <div class="menu-item" data-id="7">
+            <div class="item-header">
+                <span class="item-name">7. Philadelphia Roll</span>
+                <span class="item-price">$550</span>
+            </div>
+            <div class="item-description">Salmón crudo, queso crema, pepino, zanahoria</div>
+            <div class="item-controls">
+                <div class="quantity-control">
+                    <button class="quantity-btn minus">-</button>
+                    <span class="quantity-display">0</span>
+                    <button class="quantity-btn plus">+</button>
+                </div>
+                <button class="add-btn">Agregar al Carrito</button>
+            </div>
+        </div>
+    </div>
+
+    <div class="section">
+        <h2 class="section-title">🍱 Sushi pa' Compartir</h2>
+        
+        <div class="menu-item" data-id="8">
+            <div class="item-header">
+                <span class="item-name">20 Rolls Mixtos</span>
+                <span class="item-price">$1,200</span>
+            </div>
+            <div class="item-description">Variedad de rolls mixtos perfectos para compartir</div>
+            <div class="item-controls">
+                <div class="quantity-control">
+                    <button class="quantity-btn minus">-</button>
+                    <span class="quantity-display">0</span>
+                    <button class="quantity-btn plus">+</button>
+                </div>
+                <button class="add-btn">Agregar al Carrito</button>
+            </div>
+        </div>
+
+        <div class="menu-item" data-id="9">
+            <div class="item-header">
+                <span class="item-name">35 Rolls Mixtos</span>
+                <span class="item-price">$2,500</span>
+            </div>
+            <div class="item-description">Gran variedad de rolls mixtos para toda la familia</div>
+            <div class="item-controls">
+                <div class="quantity-control">
+                    <button class="quantity-btn minus">-</button>
+                    <span class="quantity-display">0</span>
+                    <button class="quantity-btn plus">+</button>
+                </div>
+                <button class="add-btn">Agregar al Carrito</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="checkout-section">
+    <input type="text" id="customerName" class="customer-name" placeholder="Tu nombre para el pedido">
+    <div class="delivery-option">
+        <input type="checkbox" id="deliveryCheckbox">
+        <label for="deliveryCheckbox">🛵 Agregar Delivery <span class="delivery-price">(+$100)</span></label>
+    </div>
+    <button id="whatsappBtn" class="whatsapp-btn" disabled>
+        📱 Enviar Pedido por WhatsApp
+    </button>
+</div>
+
+<script>
+    const menuItems = {
+        1: { name: "Chicken Madurito Roll", price: 400 },
+        2: { name: "Chicken Madurito Roll Fried", price: 450 },
+        3: { name: "Shrimp Supreme Roll", price: 450 },
+        4: { name: "Shrimp Supreme Roll Fried", price: 500 },
+        5: { name: "Sushi Burguer (Especial)", price: 400 },
+        6: { name: "Sushi Burguer Fried", price: 450 },
+        7: { name: "Philadelphia Roll", price: 550 },
+        8: { name: "20 Rolls Mixtos", price: 1200 },
+        9: { name: "35 Rolls Mixtos", price: 2500 }
+    };
+
+    let cart = {};
+
+    function updateQuantityDisplay(itemId) {
+        const item = document.querySelector(`.menu-item[data-id="${itemId}"]`);
+        const display = item.querySelector('.quantity-display');
+        display.textContent = cart[itemId] || 0;
+    }
+
+    function updateCart() {
+        const cartItemsDiv = document.getElementById('cartItems');
+        const totalPriceSpan = document.getElementById('totalPrice');
+        const deliveryCheckbox = document.getElementById('deliveryCheckbox');
+        
+        if (Object.keys(cart).length === 0) {
+            cartItemsDiv.innerHTML = '<div class="empty-cart">Tu carrito está vacío</div>';
+            totalPriceSpan.textContent = '0';
+            document.getElementById('whatsappBtn').disabled = true;
+            return;
+        }
+
+        let html = '';
+        let total = 0;
+
+        for (const [id, quantity] of Object.entries(cart)) {
+            const item = menuItems[id];
+            const subtotal = item.price * quantity;
+            total += subtotal;
+            html += `
+                <div class="cart-item">
+                    <span>${quantity}x ${item.name}</span>
+                    <span>$${subtotal}</span>
+                </div>
+            `;
+        }
+        
+        if (deliveryCheckbox.checked) {
+            html += `
+                <div class="cart-item">
+                    <span>🛵 Delivery</span>
+                    <span>$100</span>
+                </div>
+            `;
+            total += 100;
+        }
+
+        cartItemsDiv.innerHTML = html;
+        totalPriceSpan.textContent = total;
+        
+        const customerName = document.getElementById('customerName').value.trim();
+        document.getElementById('whatsappBtn').disabled = customerName === '';
+    }
+
+    document.querySelectorAll('.menu-item').forEach(item => {
+        const itemId = item.dataset.id;
+        const minusBtn = item.querySelector('.minus');
+        const plusBtn = item.querySelector('.plus');
+        const addBtn = item.querySelector('.add-btn');
+
+        minusBtn.addEventListener('click', () => {
+            if (cart[itemId] && cart[itemId] > 0) {
+                cart[itemId]--;
+                if (cart[itemId] === 0) {
+                    delete cart[itemId];
+                }
+                updateQuantityDisplay(itemId);
+                updateCart();
+            }
+        });
+
+        plusBtn.addEventListener('click', () => {
+            cart[itemId] = (cart[itemId] || 0) + 1;
+            updateQuantityDisplay(itemId);
+            updateCart();
+        });
+
+        addBtn.addEventListener('click', () => {
+            const currentQty = cart[itemId] || 0;
+            if (currentQty === 0) {
+                cart[itemId] = 1;
+                updateQuantityDisplay(itemId);
+                updateCart();
+            }
+        });
+    });
+
+    document.getElementById('customerName').addEventListener('input', updateCart);
+    document.getElementById('deliveryCheckbox').addEventListener('change', updateCart);
+
+    document.getElementById('whatsappBtn').addEventListener('click', () => {
+        const customerName = document.getElementById('customerName').value.trim();
+        const deliveryCheckbox = document.getElementById('deliveryCheckbox');
+        
+        if (!customerName) {
+            alert('Por favor ingresa tu nombre');
+            return;
+        }
+
+        if (Object.keys(cart).length === 0) {
+            alert('Tu carrito está vacío');
+            return;
+        }
+
+        let message = `*NUEVO PEDIDO - SUSHI HOUSE RD*\n\n`;
+        message += `👤 *Cliente:* ${customerName}\n\n`;
+        message += `*ORDEN:*\n`;
+        
+        let total = 0;
+        for (const [id, quantity] of Object.entries(cart)) {
+            const item = menuItems[id];
+            const subtotal = item.price * quantity;
+            total += subtotal;
+            message += `• ${quantity}x ${item.name} - $${subtotal}\n`;
+        }
+        
+        if (deliveryCheckbox.checked) {
+            message += `• 🛵 Delivery - $100\n`;
+            total += 100;
+        }
+        
+        message += `\n*TOTAL: $${total}*`;
+
+        const phone = '18496366871';
+        const whatsappUrl = `https://wa.me/${phone}?text=${encodeURIComponent(message)}`;
+        
+        window.open(whatsappUrl, '_blank');
+    });
+</script>
+```
+
+</body>
+</html>
