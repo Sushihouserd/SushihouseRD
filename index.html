@@ -28,8 +28,10 @@
     }
     
     .logo {
-        max-width: 300px;
+        max-width: 350px;
+        width: 90%;
         margin: 0 auto;
+        display: block;
     }
     
     .container {
@@ -145,22 +147,25 @@
         align-items: center;
         gap: 10px;
         background: #000;
-        padding: 5px 10px;
+        padding: 8px 15px;
         border-radius: 8px;
-        border: 1px solid #ff0000;
+        border: 2px solid #ff0000;
     }
     
     .quantity-btn {
         background: #ff0000;
         color: #fff;
         border: none;
-        width: 30px;
-        height: 30px;
+        width: 35px;
+        height: 35px;
         border-radius: 50%;
         cursor: pointer;
-        font-size: 18px;
+        font-size: 20px;
         font-weight: bold;
         transition: background 0.3s;
+        display: flex;
+        align-items: center;
+        justify-content: center;
     }
     
     .quantity-btn:hover {
@@ -168,10 +173,14 @@
     }
     
     .quantity-display {
-        min-width: 30px;
+        min-width: 40px;
         text-align: center;
-        font-size: 18px;
+        font-size: 22px;
         font-weight: bold;
+        color: #fff;
+        background: #ff0000;
+        padding: 5px 12px;
+        border-radius: 5px;
     }
     
     .add-btn {
@@ -280,6 +289,10 @@
         .item-name {
             font-size: 18px;
         }
+        
+        .logo {
+            max-width: 280px;
+        }
     }
 </style>
 ```
@@ -287,7 +300,7 @@
 </head>
 <body>
     <header>
-        <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 500 200'%3E%3Crect fill='none' width='500' height='200'/%3E%3Ctext x='250' y='100' font-family='Arial Black' font-size='60' fill='%23ff4444' text-anchor='middle' font-weight='bold'%3ESUSHI HOUSE RD%3C/text%3E%3Ctext x='250' y='150' font-family='Arial' font-size='30' fill='white' text-anchor='middle'%3E丼工大吉%3C/text%3E%3C/svg%3E" alt="Sushi House RD" class="logo">
+        <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 800 250'%3E%3Crect fill='%23000000' width='800' height='250'/%3E%3C!-- Sushi illustrations left --%3E%3Cellipse cx='120' cy='125' rx='60' ry='40' fill='%23ff6b35' stroke='%23fff' stroke-width='3'/%3E%3Cellipse cx='120' cy='125' rx='45' ry='28' fill='%23fff'/%3E%3Ccircle cx='108' cy='120' r='7' fill='%23a8e063'/%3E%3Ccircle cx='132' cy='120' r='7' fill='%23ffcc00'/%3E%3Cellipse cx='70' cy='155' rx='30' ry='22' fill='%234a4a4a' stroke='%23fff' stroke-width='2'/%3E%3Cellipse cx='70' cy='155' rx='22' ry='16' fill='%23fff'/%3E%3Ccircle cx='66' cy='153' r='4' fill='%23ff6b35'/%3E%3Ccircle cx='74' cy='153' r='4' fill='%2356ab2f'/%3E%3C!-- Main Text all in one line RED --%3E%3Ctext x='400' y='150' font-family='Impact, Arial Black' font-size='100' fill='%23ff0000' text-anchor='middle' font-weight='bold' letter-spacing='8'%3ESUSHI HOUSE RD%3C/text%3E%3C!-- Japanese characters in WHITE --%3E%3Ctext x='400' y='210' font-family='Arial' font-size='32' fill='%23FFFFFF' text-anchor='middle' font-weight='normal'%3E丼工大吉%3C/text%3E%3C!-- Phone icon top right --%3E%3Crect x='200' y='35' width='45' height='65' rx='8' fill='none' stroke='%23fff' stroke-width='3'/%3E%3Cline x1='210' y1='45' x2='235' y2='45' stroke='%23fff' stroke-width='2'/%3E%3Ccircle cx='222' cy='90' r='4' fill='%23fff'/%3E%3C!-- Food icon --%3E%3Cpath d='M 265 55 Q 280 40 295 55 L 295 72 Q 280 87 265 72 Z' fill='none' stroke='%23fff' stroke-width='3'/%3E%3Cline x1='280' y1='72' x2='280' y2='85' stroke='%23fff' stroke-width='3'/%3E%3C/svg%3E" alt="Sushi House RD" class="logo">
     </header>
 
 ```
