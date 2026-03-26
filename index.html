@@ -1,625 +1,542 @@
 <!DOCTYPE html>
-
 <html lang="es">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Sushi House RD - Menú Online</title>
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>SushiHouse RD — Menú</title>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Nunito:wght@300;400;600;700;800&display=swap" rel="stylesheet">
+<style>
+:root{--red:#CC0000;--red2:#e60000;--red-glow:rgba(204,0,0,0.22);--black:#080808;--black2:#111;--black3:#181818;--card:#141414;--border:#252525;--white:#f5f0eb;--muted:#777;}
+*{margin:0;padding:0;box-sizing:border-box;}
+html{scroll-behavior:smooth;}
+body{background:var(--black);color:var(--white);font-family:'Nunito',sans-serif;min-height:100vh;overflow-x:hidden;}
 
+/* HEADER */
+header{position:sticky;top:0;z-index:300;background:rgba(8,8,8,0.97);border-bottom:2px solid var(--red);padding:0 20px;display:flex;align-items:center;justify-content:space-between;height:68px;backdrop-filter:blur(16px);}
+.logo-area{display:flex;align-items:center;gap:12px;}
+.mascot{width:54px;height:54px;flex-shrink:0;}
+.logo-text{display:flex;flex-direction:column;line-height:1.05;}
+.ls{font-family:'Bebas Neue',sans-serif;font-size:27px;letter-spacing:5px;color:#fff;}
+.lh{font-family:'Bebas Neue',sans-serif;font-size:27px;letter-spacing:5px;color:var(--red);}
+.lk{font-size:8px;color:#444;letter-spacing:3px;margin-top:1px;}
+.cart-toggle{position:relative;background:var(--red);border:none;color:#fff;width:50px;height:50px;border-radius:50%;cursor:pointer;display:flex;align-items:center;justify-content:center;font-size:22px;transition:all .2s;box-shadow:0 0 20px var(--red-glow);}
+.cart-toggle:hover{background:var(--red2);transform:scale(1.08);}
+.cbadge{position:absolute;top:-4px;right:-4px;background:#fff;color:var(--red);font-size:10px;font-weight:800;width:20px;height:20px;border-radius:50%;display:none;align-items:center;justify-content:center;}
+.cbadge.show{display:flex;}
 
-    body {
-        font-family: 'Arial', sans-serif;
-        background-color: #000;
-        color: #fff;
-        min-height: 100vh;
-    }
-    
-    header {
-        background: linear-gradient(135deg, #ff0000, #cc0000);
-        padding: 20px;
-        text-align: center;
-        box-shadow: 0 4px 6px rgba(255,0,0,0.3);
-    }
-    
-    .logo {
-        max-width: 350px;
-        width: 90%;
-        margin: 0 auto;
-        display: block;
-    }
-    
-    .container {
-        max-width: 1200px;
-        margin: 0 auto;
-        padding: 20px;
-    }
-    
-    .cart-summary {
-        position: sticky;
-        top: 20px;
-        background: #1a1a1a;
-        border: 2px solid #ff0000;
-        border-radius: 15px;
-        padding: 20px;
-        margin-bottom: 30px;
-        box-shadow: 0 4px 15px rgba(255,0,0,0.3);
-    }
-    
-    .cart-summary h2 {
-        color: #ff0000;
-        margin-bottom: 15px;
-        font-size: 24px;
-    }
-    
-    .cart-items {
-        max-height: 200px;
-        overflow-y: auto;
-        margin-bottom: 15px;
-    }
-    
-    .cart-item {
-        display: flex;
-        justify-content: space-between;
-        padding: 8px 0;
-        border-bottom: 1px solid #333;
-    }
-    
-    .cart-total {
-        font-size: 28px;
-        color: #ff0000;
-        font-weight: bold;
-        text-align: right;
-        margin-top: 15px;
-        padding-top: 15px;
-        border-top: 2px solid #ff0000;
-    }
-    
-    .section {
-        background: #1a1a1a;
-        border-radius: 15px;
-        padding: 25px;
-        margin-bottom: 30px;
-        border: 1px solid #333;
-    }
-    
-    .section-title {
-        color: #ff0000;
-        font-size: 32px;
-        margin-bottom: 25px;
-        text-align: center;
-        text-transform: uppercase;
-        letter-spacing: 2px;
-    }
-    
-    .menu-item {
-        background: #0a0a0a;
-        border: 2px solid #ff0000;
-        border-radius: 10px;
-        padding: 20px;
-        margin-bottom: 20px;
-        transition: transform 0.3s, box-shadow 0.3s;
-    }
-    
-    .menu-item:hover {
-        transform: translateY(-5px);
-        box-shadow: 0 8px 20px rgba(255,0,0,0.4);
-    }
-    
-    .item-header {
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        margin-bottom: 10px;
-    }
-    
-    .item-name {
-        font-size: 20px;
-        font-weight: bold;
-        color: #fff;
-    }
-    
-    .item-price {
-        font-size: 24px;
-        color: #ff0000;
-        font-weight: bold;
-    }
-    
-    .item-description {
-        color: #ccc;
-        margin-bottom: 15px;
-        font-size: 14px;
-    }
-    
-    .item-controls {
-        display: flex;
-        align-items: center;
-        gap: 10px;
-    }
-    
-    .quantity-control {
-        display: flex;
-        align-items: center;
-        gap: 10px;
-        background: #000;
-        padding: 8px 15px;
-        border-radius: 8px;
-        border: 2px solid #ff0000;
-    }
-    
-    .quantity-btn {
-        background: #ff0000;
-        color: #fff;
-        border: none;
-        width: 35px;
-        height: 35px;
-        border-radius: 50%;
-        cursor: pointer;
-        font-size: 20px;
-        font-weight: bold;
-        transition: background 0.3s;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-    }
-    
-    .quantity-btn:hover {
-        background: #cc0000;
-    }
-    
-    .quantity-display {
-        min-width: 40px;
-        text-align: center;
-        font-size: 22px;
-        font-weight: bold;
-        color: #fff;
-        background: #ff0000;
-        padding: 5px 12px;
-        border-radius: 5px;
-    }
-    
-    .add-btn {
-        background: #ff0000;
-        color: #fff;
-        border: none;
-        padding: 10px 25px;
-        border-radius: 8px;
-        cursor: pointer;
-        font-size: 16px;
-        font-weight: bold;
-        transition: background 0.3s;
-        flex: 1;
-    }
-    
-    .add-btn:hover {
-        background: #cc0000;
-    }
-    
-    .checkout-section {
-        position: sticky;
-        bottom: 0;
-        background: #1a1a1a;
-        padding: 20px;
-        border-top: 3px solid #ff0000;
-        text-align: center;
-    }
-    
-    .customer-name {
-        width: 100%;
-        max-width: 400px;
-        padding: 15px;
-        margin-bottom: 15px;
-        border: 2px solid #ff0000;
-        border-radius: 8px;
-        background: #000;
-        color: #fff;
-        font-size: 16px;
-    }
-    
-    .delivery-option {
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        gap: 10px;
-        margin-bottom: 15px;
-        font-size: 18px;
-    }
-    
-    .delivery-option input[type="checkbox"] {
-        width: 24px;
-        height: 24px;
-        cursor: pointer;
-        accent-color: #ff0000;
-    }
-    
-    .delivery-option label {
-        cursor: pointer;
-        user-select: none;
-    }
-    
-    .delivery-price {
-        color: #ff0000;
-        font-weight: bold;
-    }
-    
-    .whatsapp-btn {
-        background: #25D366;
-        color: #fff;
-        border: none;
-        padding: 18px 40px;
-        border-radius: 10px;
-        cursor: pointer;
-        font-size: 20px;
-        font-weight: bold;
-        transition: all 0.3s;
-        box-shadow: 0 4px 15px rgba(37,211,102,0.4);
-    }
-    
-    .whatsapp-btn:hover {
-        background: #128C7E;
-        transform: scale(1.05);
-    }
-    
-    .whatsapp-btn:disabled {
-        background: #666;
-        cursor: not-allowed;
-        transform: scale(1);
-    }
-    
-    .empty-cart {
-        text-align: center;
-        color: #666;
-        padding: 20px;
-    }
-    
-    @media (max-width: 768px) {
-        .container {
-            padding: 10px;
-        }
-        
-        .section-title {
-            font-size: 24px;
-        }
-        
-        .item-name {
-            font-size: 18px;
-        }
-        
-        .logo {
-            max-width: 280px;
-        }
-    }
+/* NAV */
+.nav-bar{display:flex;padding:0 20px;overflow-x:auto;scrollbar-width:none;background:var(--black2);border-bottom:1px solid var(--border);}
+.nav-bar::-webkit-scrollbar{display:none;}
+.nav-btn{background:none;border:none;color:#aaa;padding:14px 16px;cursor:pointer;font-family:'Nunito',sans-serif;font-size:11px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;white-space:nowrap;border-bottom:2px solid transparent;transition:all .2s;margin-bottom:-1px;}
+.nav-btn:hover{color:var(--white);}
+.nav-btn.active{color:var(--red);border-bottom-color:var(--red);}
+
+/* LAYOUT */
+.layout{display:flex;min-height:calc(100vh - 115px);}
+.menu-col{flex:1;padding:24px 20px;min-width:0;}
+.sidebar{width:360px;min-height:100%;background:var(--black2);border-left:1px solid var(--border);display:flex;flex-direction:column;position:sticky;top:115px;height:calc(100vh - 115px);overflow:hidden;}
+@media(max-width:860px){.menu-col{max-width:100%;}.sidebar{position:fixed;top:0;right:-400px;width:100%;max-width:380px;height:100vh;z-index:400;transition:right .3s ease;border-left:2px solid var(--red);}.sidebar.open{right:0;}}
+
+/* SECTION */
+.section{display:none;}.section.active{display:block;}
+.sec-title{font-family:'Bebas Neue',sans-serif;font-size:34px;letter-spacing:3px;color:var(--red);margin-bottom:4px;}
+.sec-sub{font-size:11px;color:#aaa;letter-spacing:2px;text-transform:uppercase;margin-bottom:20px;}
+
+/* CARDS */
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(225px,1fr));gap:12px;}
+.card{background:var(--card);border:1px solid var(--border);border-radius:10px;padding:16px;cursor:pointer;transition:all .22s;position:relative;overflow:hidden;}
+.card::after{content:'';position:absolute;bottom:0;left:0;right:0;height:2px;background:var(--red);transform:scaleX(0);transform-origin:left;transition:transform .22s;}
+.card:hover{border-color:var(--red);transform:translateY(-3px);box-shadow:0 10px 28px rgba(0,0,0,.5);}
+.card:hover::after{transform:scaleX(1);}
+.card-name{font-family:'Bebas Neue',sans-serif;font-size:17px;letter-spacing:1px;color:#fff;margin-bottom:5px;}
+.card-desc{font-size:11px;color:#bbb;line-height:1.5;margin-bottom:12px;}
+.card-footer{display:flex;align-items:center;justify-content:space-between;}
+.card-price{font-family:'Bebas Neue',sans-serif;font-size:22px;color:var(--red);}
+.add-btn{background:var(--red);border:none;color:#fff;width:32px;height:32px;border-radius:50%;cursor:pointer;font-size:20px;display:flex;align-items:center;justify-content:center;transition:all .18s;line-height:1;}
+.add-btn:hover{background:var(--red2);transform:scale(1.15);}
+
+/* BUILDER */
+.builder{background:var(--card);border:1px solid var(--border);border-radius:12px;padding:20px;}
+.b-title{font-family:'Bebas Neue',sans-serif;font-size:20px;letter-spacing:2px;color:var(--red);margin-bottom:12px;}
+.base-row{display:flex;gap:8px;margin-bottom:16px;flex-wrap:wrap;}
+.base-btn{flex:1;padding:10px;border-radius:8px;background:var(--black3);border:1px solid var(--border);color:#888;cursor:pointer;font-size:12px;font-weight:700;transition:all .18s;text-align:center;min-width:120px;}
+.base-btn.sel{border-color:var(--red);color:var(--red);background:rgba(204,0,0,0.08);}
+.ingr-list{display:flex;flex-direction:column;gap:7px;}
+.ingr-row{display:flex;align-items:center;justify-content:space-between;background:var(--black3);border-radius:8px;padding:9px 13px;border:1px solid var(--border);transition:border-color .18s;}
+.ingr-row.sel{border-color:var(--red);}
+.ingr-name{font-size:13px;font-weight:600;}
+.ingr-price{font-size:10px;color:#ccc;}
+.ingr-tog{background:none;border:1px solid var(--border);color:#666;width:28px;height:28px;border-radius:50%;cursor:pointer;font-size:15px;display:flex;align-items:center;justify-content:center;transition:all .18s;}
+.ingr-row.sel .ingr-tog{background:var(--red);border-color:var(--red);color:#fff;}
+.b-total{margin-top:14px;padding:12px;background:var(--black);border-radius:8px;display:flex;justify-content:space-between;align-items:center;}
+.b-total-lbl{font-size:11px;color:#ccc;letter-spacing:1px;text-transform:uppercase;}
+.b-total-val{font-family:'Bebas Neue',sans-serif;font-size:26px;color:var(--red);}
+.b-add{width:100%;margin-top:10px;padding:12px;background:var(--red);border:none;color:#fff;border-radius:8px;font-family:'Nunito',sans-serif;font-size:13px;font-weight:800;letter-spacing:1px;text-transform:uppercase;cursor:pointer;transition:all .2s;}
+.b-add:hover{background:var(--red2);}
+.b-add:disabled{background:#282828;color:#444;cursor:not-allowed;}
+
+/* SIDEBAR CART */
+.sb-head{padding:16px 18px;border-bottom:1px solid var(--border);display:flex;align-items:center;justify-content:space-between;}
+.sb-title{font-family:'Bebas Neue',sans-serif;font-size:22px;letter-spacing:2px;color:var(--red);}
+.sb-close{background:none;border:none;color:#555;font-size:22px;cursor:pointer;display:none;}
+@media(max-width:860px){.sb-close{display:block;}}
+.cart-body{flex:1;overflow-y:auto;padding:12px;}
+.cart-empty{display:flex;flex-direction:column;align-items:center;justify-content:center;height:160px;gap:10px;color:#2a2a2a;}
+.ce-icon{font-size:40px;}.ce-txt{font-size:11px;letter-spacing:2px;text-transform:uppercase;}
+.cart-item{background:var(--black3);border-radius:8px;padding:10px 12px;margin-bottom:8px;display:flex;align-items:flex-start;gap:8px;}
+.ci-info{flex:1;}.ci-name{font-size:12px;font-weight:700;color:#fff;line-height:1.3;}
+.ci-detail{font-size:10px;color:#bbb;margin-top:2px;}
+.ci-price{font-family:'Bebas Neue',sans-serif;font-size:16px;color:var(--red);white-space:nowrap;}
+.ci-del{background:none;border:none;color:#333;cursor:pointer;font-size:15px;padding:0;transition:color .15s;}
+.ci-del:hover{color:var(--red);}
+.qty-row{display:flex;align-items:center;gap:6px;margin-top:4px;}
+.qty-btn{background:var(--border);border:none;color:#fff;width:22px;height:22px;border-radius:4px;cursor:pointer;font-size:14px;display:flex;align-items:center;justify-content:center;transition:background .15s;}
+.qty-btn:hover{background:var(--red);}
+.qty-v{font-size:13px;font-weight:700;min-width:18px;text-align:center;}
+
+/* ORDER FORM */
+.order-form{padding:12px 14px;border-top:1px solid var(--border);}
+.fg{margin-bottom:10px;}
+.fl{font-size:10px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:#ccc;margin-bottom:5px;display:block;}
+.fi{width:100%;background:var(--black3);border:1px solid var(--border);color:#fff;padding:9px 12px;border-radius:7px;font-family:'Nunito',sans-serif;font-size:13px;transition:border-color .2s;}
+.fi:focus{outline:none;border-color:var(--red);}
+.tog-row{display:flex;gap:8px;}
+.tog-btn{flex:1;padding:9px;border-radius:7px;background:var(--black3);border:1px solid var(--border);color:#ccc;cursor:pointer;font-size:12px;font-weight:700;transition:all .18s;text-align:center;}
+.tog-btn.on{border-color:var(--red);color:var(--red);background:rgba(204,0,0,0.08);}
+
+.total-row{display:flex;justify-content:space-between;align-items:center;padding:12px 14px;border-top:1px solid var(--border);}
+.total-lbl{font-size:11px;letter-spacing:2px;text-transform:uppercase;color:#ccc;}
+.total-val{font-family:'Bebas Neue',sans-serif;font-size:28px;color:var(--white);}
+.wa-btn{margin:0 14px 14px;padding:14px;background:#25D366;border:none;color:#fff;border-radius:10px;font-family:'Nunito',sans-serif;font-size:14px;font-weight:800;letter-spacing:1px;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:10px;transition:all .2s;text-decoration:none;width:calc(100% - 28px);}
+.wa-btn:hover{background:#1ebe5a;transform:translateY(-1px);}
+.wa-btn.disabled{background:#1e1e1e;color:#333;cursor:not-allowed;pointer-events:none;}
+.wa-btn svg{width:22px;height:22px;fill:white;flex-shrink:0;}
+
+::-webkit-scrollbar{width:3px;}::-webkit-scrollbar-track{background:transparent;}::-webkit-scrollbar-thumb{background:var(--border);border-radius:2px;}
 </style>
-
-
 </head>
 <body>
-    <header>
-        <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 800 250'%3E%3Crect fill='%23000000' width='800' height='250'/%3E%3C!-- Sushi illustrations left --%3E%3Cellipse cx='120' cy='125' rx='60' ry='40' fill='%23ff6b35' stroke='%23fff' stroke-width='3'/%3E%3Cellipse cx='120' cy='125' rx='45' ry='28' fill='%23fff'/%3E%3Ccircle cx='108' cy='120' r='7' fill='%23a8e063'/%3E%3Ccircle cx='132' cy='120' r='7' fill='%23ffcc00'/%3E%3Cellipse cx='70' cy='155' rx='30' ry='22' fill='%234a4a4a' stroke='%23fff' stroke-width='2'/%3E%3Cellipse cx='70' cy='155' rx='22' ry='16' fill='%23fff'/%3E%3Ccircle cx='66' cy='153' r='4' fill='%23ff6b35'/%3E%3Ccircle cx='74' cy='153' r='4' fill='%2356ab2f'/%3E%3C!-- Main Text all in one line RED --%3E%3Ctext x='400' y='150' font-family='Impact, Arial Black' font-size='100' fill='%23ff0000' text-anchor='middle' font-weight='bold' letter-spacing='8'%3ESUSHI HOUSE RD%3C/text%3E%3C!-- Japanese characters in WHITE --%3E%3Ctext x='400' y='210' font-family='Arial' font-size='32' fill='%23FFFFFF' text-anchor='middle' font-weight='normal'%3E丼工大吉%3C/text%3E%3C!-- Phone icon top right --%3E%3Crect x='200' y='35' width='45' height='65' rx='8' fill='none' stroke='%23fff' stroke-width='3'/%3E%3Cline x1='210' y1='45' x2='235' y2='45' stroke='%23fff' stroke-width='2'/%3E%3Ccircle cx='222' cy='90' r='4' fill='%23fff'/%3E%3C!-- Food icon --%3E%3Cpath d='M 265 55 Q 280 40 295 55 L 295 72 Q 280 87 265 72 Z' fill='none' stroke='%23fff' stroke-width='3'/%3E%3Cline x1='280' y1='72' x2='280' y2='85' stroke='%23fff' stroke-width='3'/%3E%3C/svg%3E" alt="Sushi House RD" class="logo">
-    </header>
 
+<header>
+  <div class="logo-area">
+    <!-- Logo sushi pieces SVG (no mascot) -->
+    <svg width="52" height="52" viewBox="0 0 80 80" xmlns="http://www.w3.org/2000/svg">
+      <!-- Nigiri salmon -->
+      <ellipse cx="22" cy="52" rx="18" ry="9" fill="#f0ece4"/>
+      <ellipse cx="22" cy="46" rx="16" ry="7" fill="#e8825a"/>
+      <line x1="8" y1="43" x2="36" y2="43" stroke="#c86a42" stroke-width="1.2" opacity=".5"/>
+      <line x1="8" y1="47" x2="36" y2="47" stroke="#c86a42" stroke-width="1.2" opacity=".5"/>
+      <!-- Maki roll -->
+      <circle cx="58" cy="30" r="20" fill="#1a1a1a"/>
+      <circle cx="58" cy="30" r="16" fill="#f0ece4"/>
+      <circle cx="58" cy="30" r="10" fill="#4a7c3f"/>
+      <circle cx="58" cy="30" r="6" fill="#e8825a"/>
+      <circle cx="58" cy="30" r="2.5" fill="#f0ece4"/>
+      <!-- Sesame dots on maki -->
+      <circle cx="50" cy="22" r="1.2" fill="#fff" opacity=".5"/>
+      <circle cx="66" cy="22" r="1.2" fill="#fff" opacity=".5"/>
+      <circle cx="50" cy="38" r="1.2" fill="#fff" opacity=".5"/>
+      <circle cx="66" cy="38" r="1.2" fill="#fff" opacity=".5"/>
+    </svg>
+    <div class="logo-text">
+      <div><span class="ls">SUSHI</span><span class="lh">HOUSE</span></div>
+      <div style="font-family:'Bebas Neue',sans-serif;font-size:14px;letter-spacing:8px;color:#CC0000;margin-top:-2px;">RD</div>
+      <div class="lk">开工大吉</div>
+    </div>
+  </div>
+  <button class="cart-toggle" onclick="toggleCart()" title="Ver carrito">
+    🛒<span class="cbadge" id="cbadge">0</span>
+  </button>
+</header>
 
-<div class="container">
-    <div class="cart-summary">
-        <h2>🛒 Tu Carrito</h2>
-        <div id="cartItems" class="cart-items">
-            <div class="empty-cart">Tu carrito está vacío</div>
+<nav class="nav-bar">
+  <button class="nav-btn active" onclick="showSec('entradas',this)">Entradas</button>
+  <button class="nav-btn" onclick="showSec('normales',this)">Rolls Normales</button>
+  <button class="nav-btn" onclick="showSec('fried',this)">Rolls Fried</button>
+  <button class="nav-btn" onclick="showSec('custom',this)">✦ Personalizado</button>
+  <button class="nav-btn" onclick="showSec('bowl',this)">Sushi Bowl</button>
+  <button class="nav-btn" onclick="showSec('party',this)">Sushi Party</button>
+  <button class="nav-btn" onclick="showSec('bebidas',this)">Bebidas</button>
+</nav>
+
+<div class="layout">
+
+  <!-- MENU -->
+  <div class="menu-col">
+
+    <!-- ENTRADAS -->
+    <div class="section active" id="sec-entradas">
+      <div class="sec-title">Entradas</div>
+      <div class="sec-sub">Para comenzar</div>
+      <div class="grid">
+        <div class="card" onclick="addItem('Dumplings / Gyozas',250,'4 empanaditas chinas, cerdo y vegetales, salsa soya')">
+          <div class="card-name">Dumplings / Gyozas</div>
+          <div class="card-desc">Servicio de 4 empanaditas chinas rellenas de cerdo y vegetales con salsa de soya, Fuji y semillas de sésamo.</div>
+          <div class="card-footer"><span class="card-price">$250</span><button class="add-btn">+</button></div>
         </div>
-        <div class="cart-total">
-            Total: $<span id="totalPrice">0</span>
-        </div>
+      </div>
     </div>
 
-    <div class="section">
-        <h2 class="section-title">🍣 Nuestros Rolls</h2>
-        
-        <div class="menu-item" data-id="1">
-            <div class="item-header">
-                <span class="item-name">1. Chicken Madurito Roll</span>
-                <span class="item-price">$400</span>
-            </div>
-            <div class="item-description">Plátano maduro, aguacate y pollo</div>
-            <div class="item-controls">
-                <div class="quantity-control">
-                    <button class="quantity-btn minus">-</button>
-                    <span class="quantity-display">0</span>
-                    <button class="quantity-btn plus">+</button>
-                </div>
-                <button class="add-btn">Agregar al Carrito</button>
-            </div>
+    <!-- ROLLS NORMALES -->
+    <div class="section" id="sec-normales">
+      <div class="sec-title">Rolls Normales</div>
+      <div class="sec-sub">9 rollos por orden</div>
+      <div class="grid">
+        <div class="card" onclick="addItem('Chicken Madurito Roll',400,'Pollo, plátano maduro y aguacate')">
+          <div class="card-name">Chicken Madurito Roll</div>
+          <div class="card-desc">9 rollos rellenos de pollo, plátano maduro y aguacate.</div>
+          <div class="card-footer"><span class="card-price">$400</span><button class="add-btn">+</button></div>
         </div>
-
-        <div class="menu-item" data-id="2">
-            <div class="item-header">
-                <span class="item-name">2. Chicken Madurito Roll Fried</span>
-                <span class="item-price">$450</span>
-            </div>
-            <div class="item-description">Plátano maduro, aguacate, pollo (rollo empanizado)</div>
-            <div class="item-controls">
-                <div class="quantity-control">
-                    <button class="quantity-btn minus">-</button>
-                    <span class="quantity-display">0</span>
-                    <button class="quantity-btn plus">+</button>
-                </div>
-                <button class="add-btn">Agregar al Carrito</button>
-            </div>
+        <div class="card" onclick="addItem('Sushi Burger Especial',400,'Carne angus, bacon, pepino y salsa Fuji')">
+          <div class="card-name">Sushi Burger Especial</div>
+          <div class="card-desc">9 rollos rellenos de carne angus, bacon, pepino y salsa Fuji.</div>
+          <div class="card-footer"><span class="card-price">$400</span><button class="add-btn">+</button></div>
         </div>
-
-        <div class="menu-item" data-id="3">
-            <div class="item-header">
-                <span class="item-name">3. Shrimp Supreme Roll</span>
-                <span class="item-price">$450</span>
-            </div>
-            <div class="item-description">Camarón, queso crema, zanahoria, pepino</div>
-            <div class="item-controls">
-                <div class="quantity-control">
-                    <button class="quantity-btn minus">-</button>
-                    <span class="quantity-display">0</span>
-                    <button class="quantity-btn plus">+</button>
-                </div>
-                <button class="add-btn">Agregar al Carrito</button>
-            </div>
+        <div class="card" onclick="addItem('Shrimp Supreme Roll',450,'Queso crema, camarones, pepino y zanahoria')">
+          <div class="card-name">Shrimp Supreme Roll</div>
+          <div class="card-desc">9 rollos rellenos de queso crema, camarones, pepino y zanahoria.</div>
+          <div class="card-footer"><span class="card-price">$450</span><button class="add-btn">+</button></div>
         </div>
-
-        <div class="menu-item" data-id="4">
-            <div class="item-header">
-                <span class="item-name">4. Shrimp Supreme Roll Fried</span>
-                <span class="item-price">$500</span>
-            </div>
-            <div class="item-description">Camarón cocido, queso crema, zanahoria, pepino (Rollo empanizado)</div>
-            <div class="item-controls">
-                <div class="quantity-control">
-                    <button class="quantity-btn minus">-</button>
-                    <span class="quantity-display">0</span>
-                    <button class="quantity-btn plus">+</button>
-                </div>
-                <button class="add-btn">Agregar al Carrito</button>
-            </div>
+        <div class="card" onclick="addItem('Shrimp Supreme Aplatanao',500,'Queso crema, camarón y plátano maduro')">
+          <div class="card-name">Shrimp Supreme Aplatanao</div>
+          <div class="card-desc">9 rollos rellenos de queso crema, camarón y plátano maduro.</div>
+          <div class="card-footer"><span class="card-price">$500</span><button class="add-btn">+</button></div>
         </div>
-
-        <div class="menu-item" data-id="5">
-            <div class="item-header">
-                <span class="item-name">5. Sushi Burguer ⭐ Especial de la Casa</span>
-                <span class="item-price">$400</span>
-            </div>
-            <div class="item-description">Carne angus, bacon, pepino, salsa Fuji</div>
-            <div class="item-controls">
-                <div class="quantity-control">
-                    <button class="quantity-btn minus">-</button>
-                    <span class="quantity-display">0</span>
-                    <button class="quantity-btn plus">+</button>
-                </div>
-                <button class="add-btn">Agregar al Carrito</button>
-            </div>
+        <div class="card" onclick="addItem('Philadelphia Roll',550,'Salmón crudo, queso crema, pepino y zanahoria')">
+          <div class="card-name">Philadelphia Roll</div>
+          <div class="card-desc">9 rollos rellenos de salmón crudo, queso crema, pepino y zanahoria.</div>
+          <div class="card-footer"><span class="card-price">$550</span><button class="add-btn">+</button></div>
         </div>
-
-        <div class="menu-item" data-id="6">
-            <div class="item-header">
-                <span class="item-name">6. Sushi Burguer Fried</span>
-                <span class="item-price">$450</span>
-            </div>
-            <div class="item-description">Carne angus, bacon, pepino, salsa Fuji (rollo empanizado)</div>
-            <div class="item-controls">
-                <div class="quantity-control">
-                    <button class="quantity-btn minus">-</button>
-                    <span class="quantity-display">0</span>
-                    <button class="quantity-btn plus">+</button>
-                </div>
-                <button class="add-btn">Agregar al Carrito</button>
-            </div>
+        <div class="card" onclick="addItem('Spicy Tuna Roll',400,'Tuna picante, queso crema y alga nori')">
+          <div class="card-name">Spicy Tuna Roll 🌶</div>
+          <div class="card-desc">9 rollos de tuna picante con queso crema y alga nori.</div>
+          <div class="card-footer"><span class="card-price">$400</span><button class="add-btn">+</button></div>
         </div>
-
-        <div class="menu-item" data-id="7">
-            <div class="item-header">
-                <span class="item-name">7. Philadelphia Roll</span>
-                <span class="item-price">$550</span>
-            </div>
-            <div class="item-description">Salmón crudo, queso crema, pepino, zanahoria</div>
-            <div class="item-controls">
-                <div class="quantity-control">
-                    <button class="quantity-btn minus">-</button>
-                    <span class="quantity-display">0</span>
-                    <button class="quantity-btn plus">+</button>
-                </div>
-                <button class="add-btn">Agregar al Carrito</button>
-            </div>
-        </div>
+      </div>
     </div>
 
-    <div class="section">
-        <h2 class="section-title">🍱 Sushi pa' Compartir</h2>
-        
-        <div class="menu-item" data-id="8">
-            <div class="item-header">
-                <span class="item-name">20 Rolls Mixtos</span>
-                <span class="item-price">$1,200</span>
-            </div>
-            <div class="item-description">Variedad de rolls mixtos perfectos para compartir</div>
-            <div class="item-controls">
-                <div class="quantity-control">
-                    <button class="quantity-btn minus">-</button>
-                    <span class="quantity-display">0</span>
-                    <button class="quantity-btn plus">+</button>
-                </div>
-                <button class="add-btn">Agregar al Carrito</button>
-            </div>
+    <!-- ROLLS FRIED -->
+    <div class="section" id="sec-fried">
+      <div class="sec-title">Rolls Empanizados</div>
+      <div class="sec-sub">9 rollos fritos por orden</div>
+      <div class="grid">
+        <div class="card" onclick="addItem('Chicken Madurito Roll Fried',450,'Pollo, plátano maduro y aguacate — empanizado')">
+          <div class="card-name">Chicken Madurito Roll Fried</div>
+          <div class="card-desc">9 rollos empanizados rellenos de pollo, plátano maduro y aguacate.</div>
+          <div class="card-footer"><span class="card-price">$450</span><button class="add-btn">+</button></div>
         </div>
-
-        <div class="menu-item" data-id="9">
-            <div class="item-header">
-                <span class="item-name">35 Rolls Mixtos</span>
-                <span class="item-price">$2,500</span>
-            </div>
-            <div class="item-description">Gran variedad de rolls mixtos para toda la familia</div>
-            <div class="item-controls">
-                <div class="quantity-control">
-                    <button class="quantity-btn minus">-</button>
-                    <span class="quantity-display">0</span>
-                    <button class="quantity-btn plus">+</button>
-                </div>
-                <button class="add-btn">Agregar al Carrito</button>
-            </div>
+        <div class="card" onclick="addItem('Sushi Burger Especial Fried',450,'Carne angus, bacon, pepino y salsa Fuji — empanizado')">
+          <div class="card-name">Sushi Burger Especial Fried</div>
+          <div class="card-desc">9 rollos empanizados rellenos de carne angus, bacon, pepino y salsa Fuji.</div>
+          <div class="card-footer"><span class="card-price">$450</span><button class="add-btn">+</button></div>
         </div>
+        <div class="card" onclick="addItem('Shrimp Supreme Roll Fried',500,'Queso crema, camarones, pepino y zanahoria — empanizado')">
+          <div class="card-name">Shrimp Supreme Roll Fried</div>
+          <div class="card-desc">9 rollos empanizados rellenos de queso crema, camarones, pepino y zanahoria.</div>
+          <div class="card-footer"><span class="card-price">$500</span><button class="add-btn">+</button></div>
+        </div>
+        <div class="card" onclick="addItem('Shrimp Supreme Aplatanao Fried',550,'Queso crema, camarón y plátano maduro — empanizado')">
+          <div class="card-name">Shrimp Supreme Aplatanao Fried</div>
+          <div class="card-desc">9 rollos empanizados rellenos de queso crema, camarón y plátano maduro.</div>
+          <div class="card-footer"><span class="card-price">$550</span><button class="add-btn">+</button></div>
+        </div>
+        <div class="card" onclick="addItem('Spicy Tuna Roll Fried',450,'Tuna picante, queso crema y alga nori — empanizado')">
+          <div class="card-name">Spicy Tuna Roll Fried 🌶</div>
+          <div class="card-desc">9 rollos empanizados de tuna picante con queso crema y alga nori.</div>
+          <div class="card-footer"><span class="card-price">$450</span><button class="add-btn">+</button></div>
+        </div>
+      </div>
     </div>
-</div>
 
-<div class="checkout-section">
-    <input type="text" id="customerName" class="customer-name" placeholder="Tu nombre para el pedido">
-    <div class="delivery-option">
-        <input type="checkbox" id="deliveryCheckbox">
-        <label for="deliveryCheckbox">🛵 Agregar Delivery <span class="delivery-price">(+$100)</span></label>
+    <!-- PERSONALIZADO -->
+    <div class="section" id="sec-custom">
+      <div class="sec-title">Sushi Personalizado</div>
+      <div class="sec-sub">Arma tu roll perfecto</div>
+      <div class="builder">
+        <div class="b-title">Elige tu base</div>
+        <div class="base-row">
+          <button class="base-btn" id="bn" onclick="selectBase('normal',200)">Base Normal<br><small style="opacity:.7;">$200</small></button>
+          <button class="base-btn" id="be" onclick="selectBase('empanizado',250)">Base Empanizada<br><small style="opacity:.7;">$250</small></button>
+        </div>
+        <div class="b-title">Agrega ingredientes</div>
+        <div class="ingr-list" id="custom-ingr">
+          <div class="ingr-row" data-n="Bacon" data-p="50"><div><div class="ingr-name">Bacon</div><div class="ingr-price">+$50</div></div><button class="ingr-tog" onclick="togIngr(this,'custom')">+</button></div>
+          <div class="ingr-row" data-n="Plátano maduro" data-p="50"><div><div class="ingr-name">Plátano Maduro</div><div class="ingr-price">+$50</div></div><button class="ingr-tog" onclick="togIngr(this,'custom')">+</button></div>
+          <div class="ingr-row" data-n="Pollo" data-p="100"><div><div class="ingr-name">Pollo</div><div class="ingr-price">+$100</div></div><button class="ingr-tog" onclick="togIngr(this,'custom')">+</button></div>
+          <div class="ingr-row" data-n="Carne Angus" data-p="100"><div><div class="ingr-name">Carne Angus</div><div class="ingr-price">+$100</div></div><button class="ingr-tog" onclick="togIngr(this,'custom')">+</button></div>
+          <div class="ingr-row" data-n="Camarones" data-p="150"><div><div class="ingr-name">Camarones</div><div class="ingr-price">+$150</div></div><button class="ingr-tog" onclick="togIngr(this,'custom')">+</button></div>
+          <div class="ingr-row" data-n="Salmón" data-p="200"><div><div class="ingr-name">Salmón</div><div class="ingr-price">+$200</div></div><button class="ingr-tog" onclick="togIngr(this,'custom')">+</button></div>
+          <div class="ingr-row" data-n="Queso crema" data-p="50"><div><div class="ingr-name">Queso Crema</div><div class="ingr-price">+$50</div></div><button class="ingr-tog" onclick="togIngr(this,'custom')">+</button></div>
+          <div class="ingr-row" data-n="Pepino" data-p="25"><div><div class="ingr-name">Pepino</div><div class="ingr-price">+$25</div></div><button class="ingr-tog" onclick="togIngr(this,'custom')">+</button></div>
+          <div class="ingr-row" data-n="Zanahoria" data-p="25"><div><div class="ingr-name">Zanahoria</div><div class="ingr-price">+$25</div></div><button class="ingr-tog" onclick="togIngr(this,'custom')">+</button></div>
+          <div class="ingr-row" data-n="Aguacate" data-p="50"><div><div class="ingr-name">Aguacate</div><div class="ingr-price">+$50</div></div><button class="ingr-tog" onclick="togIngr(this,'custom')">+</button></div>
+          <!-- SUSHI EXTRA -->
+          <div class="ingr-row" id="extra-row" style="border-color:var(--red);background:rgba(204,0,0,0.05);">
+            <div><div class="ingr-name" style="color:var(--red);">🍣 Sushi Extra</div><div class="ingr-price">$50 c/u</div></div>
+            <div style="display:flex;align-items:center;gap:8px;">
+              <button class="qty-btn" onclick="chgExtra(-1)" style="width:26px;height:26px;">−</button>
+              <span class="qty-v" id="extra-qty" style="min-width:20px;text-align:center;font-weight:800;color:var(--red);">0</span>
+              <button class="qty-btn" onclick="chgExtra(1)" style="width:26px;height:26px;background:var(--red);">+</button>
+            </div>
+          </div>
+        </div>
+        <div class="b-total"><span class="b-total-lbl">Total estimado</span><span class="b-total-val" id="ctotal">$0</span></div>
+        <button class="b-add" id="cadd" onclick="addCustom('sushi')" disabled>Selecciona una base primero</button>
+      </div>
     </div>
-    <button id="whatsappBtn" class="whatsapp-btn" disabled>
-        📱 Enviar Pedido por WhatsApp
+
+    <!-- BOWL -->
+    <div class="section" id="sec-bowl">
+      <div class="sec-title">Sushi Bowl</div>
+      <div class="sec-sub">Arma tu bowl personalizado</div>
+      <div class="builder">
+        <div style="background:rgba(204,0,0,0.08);border:1px solid rgba(204,0,0,0.3);border-radius:8px;padding:10px 14px;margin-bottom:16px;">
+          <div style="font-size:12px;color:var(--red);font-weight:700;">✓ Base Arroz incluida — $200</div>
+        </div>
+        <div class="b-title">Agrega ingredientes</div>
+        <div class="ingr-list" id="bowl-ingr">
+          <div class="ingr-row" data-n="Bacon" data-p="50"><div><div class="ingr-name">Bacon</div><div class="ingr-price">+$50</div></div><button class="ingr-tog" onclick="togIngr(this,'bowl')">+</button></div>
+          <div class="ingr-row" data-n="Plátano maduro" data-p="50"><div><div class="ingr-name">Plátano Maduro</div><div class="ingr-price">+$50</div></div><button class="ingr-tog" onclick="togIngr(this,'bowl')">+</button></div>
+          <div class="ingr-row" data-n="Pollo" data-p="100"><div><div class="ingr-name">Pollo</div><div class="ingr-price">+$100</div></div><button class="ingr-tog" onclick="togIngr(this,'bowl')">+</button></div>
+          <div class="ingr-row" data-n="Carne Angus" data-p="100"><div><div class="ingr-name">Carne Angus</div><div class="ingr-price">+$100</div></div><button class="ingr-tog" onclick="togIngr(this,'bowl')">+</button></div>
+          <div class="ingr-row" data-n="Camarones" data-p="150"><div><div class="ingr-name">Camarones</div><div class="ingr-price">+$150</div></div><button class="ingr-tog" onclick="togIngr(this,'bowl')">+</button></div>
+          <div class="ingr-row" data-n="Salmón" data-p="200"><div><div class="ingr-name">Salmón</div><div class="ingr-price">+$200</div></div><button class="ingr-tog" onclick="togIngr(this,'bowl')">+</button></div>
+          <div class="ingr-row" data-n="Queso crema" data-p="50"><div><div class="ingr-name">Queso Crema</div><div class="ingr-price">+$50</div></div><button class="ingr-tog" onclick="togIngr(this,'bowl')">+</button></div>
+          <div class="ingr-row" data-n="Pepino rallado" data-p="25"><div><div class="ingr-name">Pepino Rallado</div><div class="ingr-price">+$25</div></div><button class="ingr-tog" onclick="togIngr(this,'bowl')">+</button></div>
+          <div class="ingr-row" data-n="Zanahoria rallada" data-p="25"><div><div class="ingr-name">Zanahoria Rallada</div><div class="ingr-price">+$25</div></div><button class="ingr-tog" onclick="togIngr(this,'bowl')">+</button></div>
+          <div class="ingr-row" data-n="Aguacate" data-p="50"><div><div class="ingr-name">Aguacate</div><div class="ingr-price">+$50</div></div><button class="ingr-tog" onclick="togIngr(this,'bowl')">+</button></div>
+        </div>
+        <div class="b-total"><span class="b-total-lbl">Total bowl</span><span class="b-total-val" id="btotal">$200</span></div>
+        <button class="b-add" onclick="addCustom('bowl')">Agregar Bowl al Carrito</button>
+      </div>
+    </div>
+
+    <!-- PARTY -->
+    <div class="section" id="sec-party">
+      <div class="sec-title">Sushi Party 🎉</div>
+      <div class="sec-sub">Bandejas mixtas para compartir</div>
+      <div class="grid">
+        <div class="card" onclick="addItem('Bandeja Mixta 20 Rolls',1200,'Bandeja mixta 20 rolls variados')">
+          <div class="card-name">Bandeja Mixta 20 Rolls</div>
+          <div class="card-desc">Surtido de rolls variados para compartir.</div>
+          <div class="card-footer"><span class="card-price">$1,200</span><button class="add-btn">+</button></div>
+        </div>
+        <div class="card" onclick="addItem('Bandeja Mixta 40 Rolls',2400,'Bandeja mixta 40 rolls variados')">
+          <div class="card-name">Bandeja Mixta 40 Rolls</div>
+          <div class="card-desc">Surtido grande de rolls para la fiesta.</div>
+          <div class="card-footer"><span class="card-price">$2,400</span><button class="add-btn">+</button></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- BEBIDAS -->
+    <div class="section" id="sec-bebidas">
+      <div class="sec-title">Bebidas</div>
+      <div class="sec-sub">Para acompañar tu orden</div>
+      <div class="grid">
+        <div class="card" onclick="addItem('Fruit Punch',100,'')"><div class="card-name">Fruit Punch</div><div class="card-footer"><span class="card-price">$100</span><button class="add-btn">+</button></div></div>
+        <div class="card" onclick="addItem('Chinola',100,'')"><div class="card-name">Chinola</div><div class="card-footer"><span class="card-price">$100</span><button class="add-btn">+</button></div></div>
+        <div class="card" onclick="addItem('Refresco Pequeño',20,'')"><div class="card-name">Refresco Pequeño</div><div class="card-footer"><span class="card-price">$20</span><button class="add-btn">+</button></div></div>
+        <div class="card" onclick="addItem('Refresco Normal',30,'')"><div class="card-name">Refresco Normal</div><div class="card-footer"><span class="card-price">$30</span><button class="add-btn">+</button></div></div>
+      </div>
+    </div>
+
+  </div><!-- end menu-col -->
+
+  <!-- SIDEBAR -->
+  <div class="sidebar" id="sidebar">
+    <div class="sb-head">
+      <div class="sb-title">🛒 Tu Orden</div>
+      <button class="sb-close" onclick="toggleCart()">✕</button>
+    </div>
+    <div class="cart-body" id="cart-body">
+      <div class="cart-empty" id="cart-empty">
+        <div class="ce-icon">🍱</div>
+        <div class="ce-txt">Carrito vacío</div>
+      </div>
+    </div>
+    <div class="order-form">
+      <div class="fg">
+        <label class="fl">Nombre del cliente</label>
+        <input class="fi" id="cname" type="text" placeholder="Tu nombre...">
+      </div>
+      <div class="fg">
+        <label class="fl">Delivery</label>
+        <div class="tog-row">
+          <button class="tog-btn on" id="dno" onclick="setDel(false)">Sin delivery</button>
+          <button class="tog-btn" id="dyes" onclick="setDel(true)">+ Delivery $100</button>
+        </div>
+      </div>
+      <div class="fg">
+        <label class="fl">Método de pago</label>
+        <div class="tog-row">
+          <button class="tog-btn" id="pcash" onclick="setPago('Efectivo')">💵 Efectivo</button>
+          <button class="tog-btn" id="ptrans" onclick="setPago('Transferencia')">📱 Transferencia</button>
+        </div>
+      </div>
+    </div>
+    <div class="total-row">
+      <span class="total-lbl">Total RD$</span>
+      <span class="total-val" id="cart-total">0</span>
+    </div>
+    <button class="wa-btn disabled" id="wa-btn" onclick="sendWA()">
+      <svg viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+      Enviar Pedido
     </button>
+  </div>
+
 </div>
 
 <script>
-    const menuItems = {
-        1: { name: "Chicken Madurito Roll", price: 400 },
-        2: { name: "Chicken Madurito Roll Fried", price: 450 },
-        3: { name: "Shrimp Supreme Roll", price: 450 },
-        4: { name: "Shrimp Supreme Roll Fried", price: 500 },
-        5: { name: "Sushi Burguer (Especial)", price: 400 },
-        6: { name: "Sushi Burguer Fried", price: 450 },
-        7: { name: "Philadelphia Roll", price: 550 },
-        8: { name: "20 Rolls Mixtos", price: 1200 },
-        9: { name: "35 Rolls Mixtos", price: 2500 }
-    };
+let cart=[], delivery=false, pago='', cBase=null, cBaseP=0, cIngrs=[], bIngrs=[], cExtra=0;
 
-    let cart = {};
+function showSec(id,btn){
+  document.querySelectorAll('.section').forEach(s=>s.classList.remove('active'));
+  document.querySelectorAll('.nav-btn').forEach(b=>b.classList.remove('active'));
+  document.getElementById('sec-'+id).classList.add('active');
+  btn.classList.add('active');
+}
 
-    function updateQuantityDisplay(itemId) {
-        const item = document.querySelector(`.menu-item[data-id="${itemId}"]`);
-        const display = item.querySelector('.quantity-display');
-        display.textContent = cart[itemId] || 0;
-    }
+function toggleCart(){document.getElementById('sidebar').classList.toggle('open');}
 
-    function updateCart() {
-        const cartItemsDiv = document.getElementById('cartItems');
-        const totalPriceSpan = document.getElementById('totalPrice');
-        const deliveryCheckbox = document.getElementById('deliveryCheckbox');
-        
-        if (Object.keys(cart).length === 0) {
-            cartItemsDiv.innerHTML = '<div class="empty-cart">Tu carrito está vacío</div>';
-            totalPriceSpan.textContent = '0';
-            document.getElementById('whatsappBtn').disabled = true;
-            return;
-        }
+function addItem(name,price,detail){
+  const ex=cart.find(i=>i.name===name&&i.detail===detail&&!i.custom);
+  if(ex){ex.qty++;}else{cart.push({id:Date.now()+Math.random(),name,price,detail,qty:1});}
+  renderCart();
+  // flash badge
+  const b=document.getElementById('cbadge');b.style.transform='scale(1.4)';setTimeout(()=>b.style.transform='',200);
+}
 
-        let html = '';
-        let total = 0;
+function selectBase(t,p){
+  cBase=t==='normal'?'base normal':'base empanizada'; cBaseP=p;
+  document.getElementById('bn').classList.toggle('sel',t==='normal');
+  document.getElementById('be').classList.toggle('sel',t==='empanizado');
+  updateCT();
+  const btn=document.getElementById('cadd');btn.disabled=false;btn.textContent='Agregar al Carrito';
+}
 
-        for (const [id, quantity] of Object.entries(cart)) {
-            const item = menuItems[id];
-            const subtotal = item.price * quantity;
-            total += subtotal;
-            html += `
-                <div class="cart-item">
-                    <span>${quantity}x ${item.name}</span>
-                    <span>$${subtotal}</span>
-                </div>
-            `;
-        }
-        
-        if (deliveryCheckbox.checked) {
-            html += `
-                <div class="cart-item">
-                    <span>🛵 Delivery</span>
-                    <span>$100</span>
-                </div>
-            `;
-            total += 100;
-        }
+function togIngr(btn,type){
+  const row=btn.closest('.ingr-row');
+  const n=row.dataset.n, p=parseInt(row.dataset.p);
+  const arr=type==='custom'?cIngrs:bIngrs;
+  const idx=arr.findIndex(i=>i.n===n);
+  if(idx>-1){arr.splice(idx,1);row.classList.remove('sel');btn.textContent='+';}
+  else{arr.push({n,p});row.classList.add('sel');btn.textContent='✓';}
+  if(type==='custom') updateCT();
+  else updateBT();
+}
 
-        cartItemsDiv.innerHTML = html;
-        totalPriceSpan.textContent = total;
-        
-        const customerName = document.getElementById('customerName').value.trim();
-        document.getElementById('whatsappBtn').disabled = customerName === '';
-    }
+function chgExtra(d){
+  cExtra=Math.max(0, cExtra+d);
+  document.getElementById('extra-qty').textContent=cExtra;
+  updateCT();
+}
 
-    document.querySelectorAll('.menu-item').forEach(item => {
-        const itemId = item.dataset.id;
-        const minusBtn = item.querySelector('.minus');
-        const plusBtn = item.querySelector('.plus');
-        const addBtn = item.querySelector('.add-btn');
+function updateCT(){
+  const t=cBaseP+cIngrs.reduce((s,i)=>s+i.p,0)+(cExtra*50);
+  document.getElementById('ctotal').textContent='$'+t.toLocaleString();
+}
 
-        minusBtn.addEventListener('click', () => {
-            if (cart[itemId] && cart[itemId] > 0) {
-                cart[itemId]--;
-                if (cart[itemId] === 0) {
-                    delete cart[itemId];
-                }
-                updateQuantityDisplay(itemId);
-                updateCart();
-            }
-        });
+function updateBT(){
+  const t=200+bIngrs.reduce((s,i)=>s+i.p,0);
+  document.getElementById('btotal').textContent='$'+t.toLocaleString();
+}
 
-        plusBtn.addEventListener('click', () => {
-            cart[itemId] = (cart[itemId] || 0) + 1;
-            updateQuantityDisplay(itemId);
-            updateCart();
-        });
+function addCustom(type){
+  if(type==='sushi'){
+    if(!cBase){alert('Selecciona una base primero');return;}
+    const t=cBaseP+cIngrs.reduce((s,i)=>s+i.p,0)+(cExtra*50);
+    const parts=[cBase,...cIngrs.map(i=>i.n)];
+    if(cExtra>0) parts.push(`${cExtra}x sushi extra`);
+    cart.push({id:Date.now(),name:'Sushi Personalizado',price:t,detail:parts.join(', '),qty:1,custom:true});
+    cBase=null;cBaseP=0;cIngrs=[];cExtra=0;
+    document.querySelectorAll('#custom-ingr .ingr-row').forEach(r=>{r.classList.remove('sel');r.querySelector('.ingr-tog') && (r.querySelector('.ingr-tog').textContent='+');});
+    document.getElementById('bn').classList.remove('sel');
+    document.getElementById('be').classList.remove('sel');
+    document.getElementById('ctotal').textContent='$0';
+    document.getElementById('extra-qty').textContent='0';
+    document.getElementById('cadd').disabled=true;
+    document.getElementById('cadd').textContent='Selecciona una base primero';
+  } else {
+    const t=200+bIngrs.reduce((s,i)=>s+i.p,0);
+    const parts=['base arroz',...bIngrs.map(i=>i.n)];
+    cart.push({id:Date.now(),name:'Sushi Bowl',price:t,detail:parts.join(', '),qty:1,custom:true});
+    bIngrs=[];
+    document.querySelectorAll('#bowl-ingr .ingr-row').forEach(r=>{r.classList.remove('sel');r.querySelector('.ingr-tog').textContent='+';});
+    document.getElementById('btotal').textContent='$200';
+  }
+  renderCart();
+}
 
-        addBtn.addEventListener('click', () => {
-            const currentQty = cart[itemId] || 0;
-            if (currentQty === 0) {
-                cart[itemId] = 1;
-                updateQuantityDisplay(itemId);
-                updateCart();
-            }
-        });
-    });
+function renderCart(){
+  const body=document.getElementById('cart-body');
+  const empty=document.getElementById('cart-empty');
+  const badge=document.getElementById('cbadge');
+  const totalEl=document.getElementById('cart-total');
+  const wa=document.getElementById('wa-btn');
+  const total_items=cart.reduce((s,i)=>s+i.qty,0);
+  badge.textContent=total_items;
+  badge.classList.toggle('show',total_items>0);
+  body.querySelectorAll('.cart-item').forEach(e=>e.remove());
+  if(cart.length===0){empty.style.display='flex';totalEl.textContent='0';wa.classList.add('disabled');return;}
+  empty.style.display='none';wa.classList.remove('disabled');
+  let sub=0;
+  cart.forEach(item=>{
+    sub+=item.price*item.qty;
+    const el=document.createElement('div');el.className='cart-item';
+    const showDetail=item.custom&&item.detail;
+    el.innerHTML=`<div class="ci-info"><div class="ci-name">${item.name}</div>${showDetail?`<div class="ci-detail">${item.detail}</div>`:''}<div class="qty-row"><button class="qty-btn" onclick="chgQty('${item.id}',-1)">−</button><span class="qty-v">${item.qty}</span><button class="qty-btn" onclick="chgQty('${item.id}',1)">+</button></div></div><div style="display:flex;flex-direction:column;align-items:flex-end;gap:4px;"><span class="ci-price">$${(item.price*item.qty).toLocaleString()}</span><button class="ci-del" onclick="remItem('${item.id}')">🗑</button></div>`;
+    body.appendChild(el);
+  });
+  const grand=sub+(delivery?100:0);
+  totalEl.textContent=grand.toLocaleString();
+}
 
-    document.getElementById('customerName').addEventListener('input', updateCart);
-    document.getElementById('deliveryCheckbox').addEventListener('change', updateCart);
+function chgQty(id,d){const i=cart.find(x=>x.id==id);if(!i)return;i.qty+=d;if(i.qty<=0)cart=cart.filter(x=>x.id!=id);renderCart();}
+function remItem(id){cart=cart.filter(x=>x.id!=id);renderCart();}
 
-    document.getElementById('whatsappBtn').addEventListener('click', () => {
-        const customerName = document.getElementById('customerName').value.trim();
-        const deliveryCheckbox = document.getElementById('deliveryCheckbox');
-        
-        if (!customerName) {
-            alert('Por favor ingresa tu nombre');
-            return;
-        }
+function setDel(v){
+  delivery=v;
+  document.getElementById('dyes').classList.toggle('on',v);
+  document.getElementById('dno').classList.toggle('on',!v);
+  renderCart();
+}
 
-        if (Object.keys(cart).length === 0) {
-            alert('Tu carrito está vacío');
-            return;
-        }
+function setPago(v){
+  pago=v;
+  document.getElementById('pcash').classList.toggle('on',v==='Efectivo');
+  document.getElementById('ptrans').classList.toggle('on',v==='Transferencia');
+}function sendWA(){
+  if(cart.length===0){alert('Agrega items al carrito primero');return;}
+  const name=document.getElementById('cname').value.trim()||'Sin nombre';
+  const sub=cart.reduce((s,i)=>s+(i.price*i.qty),0);
+  const grand=sub+(delivery?100:0);
 
-        let message = `*NUEVO PEDIDO - SUSHI HOUSE RD*\n\n`;
-        message += `👤 *Cliente:* ${customerName}\n\n`;
-        message += `*ORDEN:*\n`;
-        
-        let total = 0;
-        for (const [id, quantity] of Object.entries(cart)) {
-            const item = menuItems[id];
-            const subtotal = item.price * quantity;
-            total += subtotal;
-            message += `• ${quantity}x ${item.name} - $${subtotal}\n`;
-        }
-        
-        if (deliveryCheckbox.checked) {
-            message += `• 🛵 Delivery - $100\n`;
-            total += 100;
-        }
-        
-        message += `\n*TOTAL: $${total}*`;
+  const lines=cart.map(i=>{
+    let l=`• ${i.qty}x ${i.name}`;
+    if(i.custom && i.detail) l+=` (${i.detail})`;
+    l+=` - $${(i.price*i.qty).toLocaleString()}`;
+    return l;
+  });
+  if(delivery) lines.push(`• 🛵 Delivery - $100`);
 
-        const phone = '18496366871';
-        const whatsappUrl = `https://wa.me/${phone}?text=${encodeURIComponent(message)}`;
-        
-        window.open(whatsappUrl, '_blank');
-    });
+  const msg=[
+    `*NUEVO PEDIDO - SUSHI HOUSE RD*`,
+    ``,
+    `👤 *Cliente:* ${name}`,
+    ``,
+    `*ORDEN:*`,
+    ...lines,
+    ``,
+    pago ? `💳 *Pago:* ${pago}` : '',
+    ``,
+    `*TOTAL: $${grand.toLocaleString()}*`
+  ].filter(l=>l!==null).join('\n').trim();
+
+  window.open(`https://wa.me/18092401719?text=${encodeURIComponent(msg)}`,'_blank');
+}
+
+setDel(false);
 </script>
-
-
 </body>
 </html>
