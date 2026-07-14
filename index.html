@@ -6,7 +6,7 @@
 <title>SushiHouse RD — Menú</title>
 <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Nunito:wght@300;400;600;700;800&display=swap" rel="stylesheet">
 <style>
-:root{--red:#CC0000;--red2:#e60000;--red-glow:rgba(204,0,0,0.22);--black:#080808;--black2:#111;--black3:#181818;--card:#141414;--border:#252525;--white:#f5f0eb;--muted:#777;}
+:root{--red:#CC0000;--red2:#e60000;--red-glow:rgba(204,0,0,0.22);--gold:#c9a84c;--gold2:#ffd700;--black:#080808;--black2:#111;--black3:#181818;--card:#141414;--border:#252525;--white:#f5f0eb;--green:#25D366;}
 *{margin:0;padding:0;box-sizing:border-box;}
 html{scroll-behavior:smooth;}
 body{background:var(--black);color:var(--white);font-family:'Nunito',sans-serif;min-height:100vh;overflow-x:hidden;}
@@ -14,52 +14,78 @@ body{background:var(--black);color:var(--white);font-family:'Nunito',sans-serif;
 /* HEADER */
 header{position:sticky;top:0;z-index:300;background:rgba(8,8,8,0.97);border-bottom:2px solid var(--red);padding:0 20px;display:flex;align-items:center;justify-content:space-between;height:68px;backdrop-filter:blur(16px);}
 .logo-area{display:flex;align-items:center;gap:12px;}
-.mascot{width:54px;height:54px;flex-shrink:0;}
 .logo-text{display:flex;flex-direction:column;line-height:1.05;}
 .ls{font-family:'Bebas Neue',sans-serif;font-size:27px;letter-spacing:5px;color:#fff;}
 .lh{font-family:'Bebas Neue',sans-serif;font-size:27px;letter-spacing:5px;color:var(--red);}
-.lk{font-size:8px;color:#444;letter-spacing:3px;margin-top:1px;}
+.lk{font-size:8px;color:#555;letter-spacing:3px;margin-top:1px;}
 .cart-toggle{position:relative;background:var(--red);border:none;color:#fff;width:50px;height:50px;border-radius:50%;cursor:pointer;display:flex;align-items:center;justify-content:center;font-size:22px;transition:all .2s;box-shadow:0 0 20px var(--red-glow);}
 .cart-toggle:hover{background:var(--red2);transform:scale(1.08);}
 .cbadge{position:absolute;top:-4px;right:-4px;background:#fff;color:var(--red);font-size:10px;font-weight:800;width:20px;height:20px;border-radius:50%;display:none;align-items:center;justify-content:center;}
 .cbadge.show{display:flex;}
 
 /* NAV */
-.nav-bar{display:flex;padding:0 20px;overflow-x:auto;scrollbar-width:none;background:var(--black2);border-bottom:1px solid var(--border);}
+.nav-bar{display:flex;padding:0 16px;overflow-x:auto;scrollbar-width:none;background:var(--black2);border-bottom:1px solid var(--border);}
 .nav-bar::-webkit-scrollbar{display:none;}
-.nav-btn{background:none;border:none;color:#aaa;padding:14px 16px;cursor:pointer;font-family:'Nunito',sans-serif;font-size:11px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;white-space:nowrap;border-bottom:2px solid transparent;transition:all .2s;margin-bottom:-1px;}
-.nav-btn:hover{color:var(--white);}
+.nav-btn{background:none;border:none;color:#aaa;padding:13px 14px;cursor:pointer;font-family:'Nunito',sans-serif;font-size:10px;font-weight:700;letter-spacing:1px;text-transform:uppercase;white-space:nowrap;border-bottom:2px solid transparent;transition:all .2s;margin-bottom:-1px;}
+.nav-btn:hover{color:#fff;}
 .nav-btn.active{color:var(--red);border-bottom-color:var(--red);}
+.nav-btn.gold{color:var(--gold);}
+.nav-btn.gold.active{color:var(--gold2);border-bottom-color:var(--gold2);}
 
 /* LAYOUT */
 .layout{display:flex;min-height:calc(100vh - 115px);}
 .menu-col{flex:1;padding:24px 20px;min-width:0;}
-.sidebar{width:360px;min-height:100%;background:var(--black2);border-left:1px solid var(--border);display:flex;flex-direction:column;position:sticky;top:115px;height:calc(100vh - 115px);overflow:hidden;}
+.sidebar{width:360px;background:var(--black2);border-left:1px solid var(--border);display:flex;flex-direction:column;position:sticky;top:115px;height:calc(100vh - 115px);overflow:hidden;}
 @media(max-width:860px){.menu-col{max-width:100%;}.sidebar{position:fixed;top:0;right:-400px;width:100%;max-width:380px;height:100vh;z-index:400;transition:right .3s ease;border-left:2px solid var(--red);}.sidebar.open{right:0;}}
 
 /* SECTION */
 .section{display:none;}.section.active{display:block;}
 .sec-title{font-family:'Bebas Neue',sans-serif;font-size:34px;letter-spacing:3px;color:var(--red);margin-bottom:4px;}
+.sec-title.gold{color:var(--gold);}
 .sec-sub{font-size:11px;color:#aaa;letter-spacing:2px;text-transform:uppercase;margin-bottom:20px;}
 
 /* CARDS */
 .grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(225px,1fr));gap:12px;}
-.card{background:var(--card);border:1px solid var(--border);border-radius:10px;padding:16px;cursor:pointer;transition:all .22s;position:relative;overflow:hidden;}
+.card{background:var(--card);border:1px solid var(--border);border-radius:10px;padding:16px;cursor:default;transition:all .22s;position:relative;overflow:hidden;}
 .card::after{content:'';position:absolute;bottom:0;left:0;right:0;height:2px;background:var(--red);transform:scaleX(0);transform-origin:left;transition:transform .22s;}
 .card:hover{border-color:var(--red);transform:translateY(-3px);box-shadow:0 10px 28px rgba(0,0,0,.5);}
 .card:hover::after{transform:scaleX(1);}
+.card.gold-card{border-color:var(--gold);background:linear-gradient(135deg,#141414 60%,#1a1400);}
+.card.gold-card::after{background:var(--gold);}
+.card.gold-card:hover{border-color:var(--gold2);}
 .card-name{font-family:'Bebas Neue',sans-serif;font-size:17px;letter-spacing:1px;color:#fff;margin-bottom:5px;}
+.card-name.gold{color:var(--gold2);}
 .card-desc{font-size:11px;color:#bbb;line-height:1.5;margin-bottom:12px;}
-.card-footer{display:flex;align-items:center;justify-content:space-between;}
-.card-price{font-family:'Bebas Neue',sans-serif;font-size:22px;color:var(--red);}
-.add-btn{background:var(--red);border:none;color:#fff;width:32px;height:32px;border-radius:50%;cursor:pointer;font-size:20px;display:flex;align-items:center;justify-content:center;transition:all .18s;line-height:1;}
+.card-footer{display:flex;align-items:center;justify-content:space-between;gap:8px;}
+.card-price{font-family:'Bebas Neue',sans-serif;font-size:20px;color:var(--red);}
+.card-price.gold{color:var(--gold);}
+.add-btn{background:var(--red);border:none;color:#fff;width:32px;height:32px;border-radius:50%;cursor:pointer;font-size:20px;display:flex;align-items:center;justify-content:center;transition:all .18s;line-height:1;flex-shrink:0;}
 .add-btn:hover{background:var(--red2);transform:scale(1.15);}
+.add-btn.gold-btn{background:var(--gold);}
+.add-btn.gold-btn:hover{background:var(--gold2);}
+
+/* PREMIUM TOGGLE (Normal / Fried) */
+.premium-toggle{display:flex;gap:6px;margin-bottom:8px;}
+.pt-btn{flex:1;padding:6px 8px;border-radius:6px;background:var(--black3);border:1px solid var(--border);color:#aaa;cursor:pointer;font-size:11px;font-weight:700;transition:all .18s;text-align:center;}
+.pt-btn.sel{background:rgba(201,168,76,0.15);border-color:var(--gold);color:var(--gold2);}
+
+/* SALSAS SECTION */
+.salsas-area{background:var(--card);border:1px solid var(--border);border-radius:12px;padding:20px;margin-bottom:20px;}
+.salsas-title{font-family:'Bebas Neue',sans-serif;font-size:22px;letter-spacing:2px;color:var(--red);margin-bottom:6px;}
+.salsas-note{font-size:11px;color:#aaa;margin-bottom:14px;}
+.salsa-list{display:flex;flex-direction:column;gap:7px;}
+.salsa-row{display:flex;align-items:center;justify-content:space-between;background:var(--black3);border-radius:8px;padding:10px 14px;border:1px solid var(--border);cursor:pointer;transition:all .18s;}
+.salsa-row.sel{border-color:var(--red);background:rgba(204,0,0,0.08);}
+.salsa-name{font-size:13px;font-weight:700;}
+.salsa-price{font-size:11px;color:#aaa;}
+.salsa-check{width:22px;height:22px;border-radius:50%;border:1px solid var(--border);display:flex;align-items:center;justify-content:center;font-size:13px;transition:all .18s;}
+.salsa-row.sel .salsa-check{background:var(--red);border-color:var(--red);color:#fff;}
 
 /* BUILDER */
 .builder{background:var(--card);border:1px solid var(--border);border-radius:12px;padding:20px;}
 .b-title{font-family:'Bebas Neue',sans-serif;font-size:20px;letter-spacing:2px;color:var(--red);margin-bottom:12px;}
 .base-row{display:flex;gap:8px;margin-bottom:16px;flex-wrap:wrap;}
-.base-btn{flex:1;padding:10px;border-radius:8px;background:var(--black3);border:1px solid var(--border);color:#888;cursor:pointer;font-size:12px;font-weight:700;transition:all .18s;text-align:center;min-width:120px;}
+.base-btn{flex:1;padding:10px;border-radius:8px;background:var(--black3);border:1px solid var(--border);color:#aaa;cursor:pointer;font-size:12px;font-weight:700;transition:all .18s;text-align:center;min-width:120px;}
 .base-btn.sel{border-color:var(--red);color:var(--red);background:rgba(204,0,0,0.08);}
 .ingr-list{display:flex;flex-direction:column;gap:7px;}
 .ingr-row{display:flex;align-items:center;justify-content:space-between;background:var(--black3);border-radius:8px;padding:9px 13px;border:1px solid var(--border);transition:border-color .18s;}
@@ -75,14 +101,23 @@ header{position:sticky;top:0;z-index:300;background:rgba(8,8,8,0.97);border-bott
 .b-add:hover{background:var(--red2);}
 .b-add:disabled{background:#282828;color:#444;cursor:not-allowed;}
 
-/* SIDEBAR CART */
+/* COMBO */
+.combo-card{background:linear-gradient(135deg,#141414,#1a0a00);border:1px solid #3a2800;border-radius:12px;padding:18px;transition:all .22s;cursor:default;}
+.combo-card:hover{border-color:var(--gold);transform:translateY(-2px);box-shadow:0 8px 24px rgba(0,0,0,.5);}
+.combo-num{font-size:9px;letter-spacing:2px;color:var(--gold);text-transform:uppercase;font-weight:800;margin-bottom:4px;}
+.combo-name{font-family:'Bebas Neue',sans-serif;font-size:18px;letter-spacing:1px;color:var(--gold2);margin-bottom:6px;}
+.combo-desc{font-size:11px;color:#aaa;line-height:1.5;margin-bottom:12px;}
+.combo-footer{display:flex;align-items:center;justify-content:space-between;}
+.combo-price{font-family:'Bebas Neue',sans-serif;font-size:24px;color:var(--gold);}
+
+/* SIDEBAR */
 .sb-head{padding:16px 18px;border-bottom:1px solid var(--border);display:flex;align-items:center;justify-content:space-between;}
 .sb-title{font-family:'Bebas Neue',sans-serif;font-size:22px;letter-spacing:2px;color:var(--red);}
 .sb-close{background:none;border:none;color:#555;font-size:22px;cursor:pointer;display:none;}
 @media(max-width:860px){.sb-close{display:block;}}
 .cart-body{flex:1;overflow-y:auto;padding:12px;}
 .cart-empty{display:flex;flex-direction:column;align-items:center;justify-content:center;height:160px;gap:10px;color:#2a2a2a;}
-.ce-icon{font-size:40px;}.ce-txt{font-size:11px;letter-spacing:2px;text-transform:uppercase;}
+.ce-icon{font-size:40px;}.ce-txt{font-size:11px;letter-spacing:2px;text-transform:uppercase;color:#333;}
 .cart-item{background:var(--black3);border-radius:8px;padding:10px 12px;margin-bottom:8px;display:flex;align-items:flex-start;gap:8px;}
 .ci-info{flex:1;}.ci-name{font-size:12px;font-weight:700;color:#fff;line-height:1.3;}
 .ci-detail{font-size:10px;color:#bbb;margin-top:2px;}
@@ -103,305 +138,496 @@ header{position:sticky;top:0;z-index:300;background:rgba(8,8,8,0.97);border-bott
 .tog-row{display:flex;gap:8px;}
 .tog-btn{flex:1;padding:9px;border-radius:7px;background:var(--black3);border:1px solid var(--border);color:#ccc;cursor:pointer;font-size:12px;font-weight:700;transition:all .18s;text-align:center;}
 .tog-btn.on{border-color:var(--red);color:var(--red);background:rgba(204,0,0,0.08);}
-
 .total-row{display:flex;justify-content:space-between;align-items:center;padding:12px 14px;border-top:1px solid var(--border);}
 .total-lbl{font-size:11px;letter-spacing:2px;text-transform:uppercase;color:#ccc;}
 .total-val{font-family:'Bebas Neue',sans-serif;font-size:28px;color:var(--white);}
-.wa-btn{margin:0 14px 14px;padding:14px;background:#25D366;border:none;color:#fff;border-radius:10px;font-family:'Nunito',sans-serif;font-size:14px;font-weight:800;letter-spacing:1px;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:10px;transition:all .2s;text-decoration:none;width:calc(100% - 28px);}
+.wa-btn{margin:0 14px 14px;padding:14px;background:var(--green);border:none;color:#fff;border-radius:10px;font-family:'Nunito',sans-serif;font-size:14px;font-weight:800;letter-spacing:1px;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:10px;transition:all .2s;width:calc(100% - 28px);}
 .wa-btn:hover{background:#1ebe5a;transform:translateY(-1px);}
 .wa-btn.disabled{background:#1e1e1e;color:#333;cursor:not-allowed;pointer-events:none;}
 .wa-btn svg{width:22px;height:22px;fill:white;flex-shrink:0;}
+
+/* MODAL */
+.modal-overlay{position:fixed;inset:0;background:rgba(0,0,0,0.85);z-index:500;display:none;align-items:center;justify-content:center;padding:20px;}
+.modal-overlay.show{display:flex;}
+.modal{background:var(--black2);border:2px solid var(--red);border-radius:14px;padding:24px;max-width:360px;width:100%;animation:popIn .25s ease;}
+@keyframes popIn{from{transform:scale(0.85);opacity:0;}to{transform:scale(1);opacity:1;}}
+.modal-title{font-family:'Bebas Neue',sans-serif;font-size:26px;letter-spacing:2px;color:var(--red);margin-bottom:6px;}
+.modal-sub{font-size:12px;color:#aaa;margin-bottom:18px;}
+.modal-salsa-list{display:flex;flex-direction:column;gap:7px;margin-bottom:18px;}
+.modal-salsa-row{display:flex;align-items:center;justify-content:space-between;background:var(--black3);border-radius:8px;padding:10px 14px;border:1px solid var(--border);cursor:pointer;transition:all .18s;}
+.modal-salsa-row.sel{border-color:var(--red);background:rgba(204,0,0,0.08);}
+.modal-check{width:22px;height:22px;border-radius:50%;border:1px solid var(--border);display:flex;align-items:center;justify-content:center;font-size:13px;transition:all .18s;}
+.modal-salsa-row.sel .modal-check{background:var(--red);border-color:var(--red);color:#fff;}
+.modal-confirm{width:100%;padding:13px;background:var(--red);border:none;color:#fff;border-radius:8px;font-family:'Nunito',sans-serif;font-size:14px;font-weight:800;cursor:pointer;transition:all .2s;}
+.modal-confirm:hover{background:var(--red2);}
+.modal-confirm:disabled{background:#282828;color:#444;cursor:not-allowed;}
 
 ::-webkit-scrollbar{width:3px;}::-webkit-scrollbar-track{background:transparent;}::-webkit-scrollbar-thumb{background:var(--border);border-radius:2px;}
 </style>
 </head>
 <body>
 
+<!-- SALSA MODAL -->
+<div class="modal-overlay" id="salsaModal">
+  <div class="modal">
+    <div class="modal-title">🥢 ¿Qué salsas deseas?</div>
+    <div class="modal-sub">Puedes seleccionar una o varias opciones. Debes elegir al menos una para completar tu pedido.</div>
+    <div class="modal-salsa-list" id="modalSalsaList">
+      <div class="modal-salsa-row" onclick="togModalSalsa(this,'Salsa Fuji',0)">
+        <div><div style="font-size:13px;font-weight:700;">Salsa Fuji</div><div style="font-size:10px;color:#aaa;">Gratis</div></div>
+        <div class="modal-check">✓</div>
+      </div>
+      <div class="modal-salsa-row" onclick="togModalSalsa(this,'Salsa Soja',0)">
+        <div><div style="font-size:13px;font-weight:700;">Salsa Soja</div><div style="font-size:10px;color:#aaa;">Gratis</div></div>
+        <div class="modal-check">✓</div>
+      </div>
+      <div class="modal-salsa-row" onclick="togModalSalsa(this,'Salsa Agridulce',25)">
+        <div><div style="font-size:13px;font-weight:700;">Salsa Agridulce</div><div style="font-size:10px;color:#aaa;">+$25</div></div>
+        <div class="modal-check">✓</div>
+      </div>
+      <div class="modal-salsa-row" onclick="togModalSalsa(this,'Salsa Anguila',25)">
+        <div><div style="font-size:13px;font-weight:700;">Salsa Anguila</div><div style="font-size:10px;color:#aaa;">+$25</div></div>
+        <div class="modal-check">✓</div>
+      </div>
+      <div class="modal-salsa-row" onclick="togModalSalsa(this,'Salsa Chinola',30)">
+        <div><div style="font-size:13px;font-weight:700;">Salsa Chinola</div><div style="font-size:10px;color:#aaa;">+$30</div></div>
+        <div class="modal-check">✓</div>
+      </div>
+      <div class="modal-salsa-row" onclick="togModalSalsa(this,'Sin salsa (solo por encima)',0)">
+        <div><div style="font-size:13px;font-weight:700;">Sin salsa (solo por encima)</div><div style="font-size:10px;color:#aaa;">—</div></div>
+        <div class="modal-check">✓</div>
+      </div>
+    </div>
+    <button class="modal-confirm" id="modalConfirmBtn" onclick="confirmSalsa()" disabled>Confirmar y enviar pedido</button>
+  </div>
+</div>
+
+<!-- HEADER -->
 <header>
   <div class="logo-area">
-    <!-- Logo sushi pieces SVG (no mascot) -->
-    <svg width="52" height="52" viewBox="0 0 80 80" xmlns="http://www.w3.org/2000/svg">
-      <!-- Nigiri salmon -->
+    <svg width="48" height="48" viewBox="0 0 80 80" xmlns="http://www.w3.org/2000/svg">
       <ellipse cx="22" cy="52" rx="18" ry="9" fill="#f0ece4"/>
       <ellipse cx="22" cy="46" rx="16" ry="7" fill="#e8825a"/>
       <line x1="8" y1="43" x2="36" y2="43" stroke="#c86a42" stroke-width="1.2" opacity=".5"/>
       <line x1="8" y1="47" x2="36" y2="47" stroke="#c86a42" stroke-width="1.2" opacity=".5"/>
-      <!-- Maki roll -->
       <circle cx="58" cy="30" r="20" fill="#1a1a1a"/>
       <circle cx="58" cy="30" r="16" fill="#f0ece4"/>
       <circle cx="58" cy="30" r="10" fill="#4a7c3f"/>
       <circle cx="58" cy="30" r="6" fill="#e8825a"/>
       <circle cx="58" cy="30" r="2.5" fill="#f0ece4"/>
-      <!-- Sesame dots on maki -->
-      <circle cx="50" cy="22" r="1.2" fill="#fff" opacity=".5"/>
-      <circle cx="66" cy="22" r="1.2" fill="#fff" opacity=".5"/>
-      <circle cx="50" cy="38" r="1.2" fill="#fff" opacity=".5"/>
-      <circle cx="66" cy="38" r="1.2" fill="#fff" opacity=".5"/>
     </svg>
     <div class="logo-text">
       <div><span class="ls">SUSHI</span><span class="lh">HOUSE</span></div>
       <div style="font-family:'Bebas Neue',sans-serif;font-size:14px;letter-spacing:8px;color:#CC0000;margin-top:-2px;">RD</div>
       <div class="lk">开工大吉</div>
+      <div style="font-size:9px;color:#aaa;letter-spacing:2px;margin-top:3px;font-style:italic;font-weight:600;">By Wilsset & Jefrey</div>
     </div>
   </div>
-  <button class="cart-toggle" onclick="toggleCart()" title="Ver carrito">
-    🛒<span class="cbadge" id="cbadge">0</span>
-  </button>
+  <button class="cart-toggle" onclick="toggleCart()">🛒<span class="cbadge" id="cbadge">0</span></button>
 </header>
 
+<!-- NAV -->
 <nav class="nav-bar">
   <button class="nav-btn active" onclick="showSec('entradas',this)">Entradas</button>
+  <button class="nav-btn gold" onclick="showSec('premium',this)">✦ Sushis Premium</button>
   <button class="nav-btn" onclick="showSec('normales',this)">Rolls Normales</button>
   <button class="nav-btn" onclick="showSec('fried',this)">Rolls Fried</button>
   <button class="nav-btn" onclick="showSec('custom',this)">✦ Personalizado</button>
   <button class="nav-btn" onclick="showSec('bowl',this)">Sushi Bowl</button>
   <button class="nav-btn" onclick="showSec('party',this)">Sushi Party</button>
+  <button class="nav-btn" onclick="showSec('combos',this)">🎁 Combos</button>
   <button class="nav-btn" onclick="showSec('bebidas',this)">Bebidas</button>
 </nav>
 
 <div class="layout">
+<div class="menu-col">
 
-  <!-- MENU -->
-  <div class="menu-col">
-
-    <!-- ENTRADAS -->
-    <div class="section active" id="sec-entradas">
-      <div class="sec-title">Entradas</div>
-      <div class="sec-sub">Para comenzar</div>
-      <div class="grid">
-        <div class="card" onclick="addItem('Dumplings / Gyozas',250,'4 empanaditas chinas, cerdo y vegetales, salsa soya')">
-          <div class="card-name">Dumplings / Gyozas</div>
-          <div class="card-desc">Servicio de 4 empanaditas chinas rellenas de cerdo y vegetales con salsa de soya, Fuji y semillas de sésamo.</div>
-          <div class="card-footer"><span class="card-price">$250</span><button class="add-btn">+</button></div>
-        </div>
+  <!-- ENTRADAS -->
+  <div class="section active" id="sec-entradas">
+    <div class="sec-title">Entradas</div>
+    <div class="sec-sub">Para comenzar</div>
+    <div class="grid">
+      <div class="card" onclick="addItem('Dumplings / Gyozas',250,'')">
+        <div class="card-name">Dumplings / Gyozas</div>
+        <div class="card-desc">4 empanaditas chinas rellenas de cerdo y vegetales con salsa de soya, Fuji y semillas de sésamo.</div>
+        <div class="card-footer"><span class="card-price">$250</span><button class="add-btn">+</button></div>
+      </div>
+      <div class="card" onclick="addItem('Egg Roll / Rollos Primavera',250,'')">
+        <div class="card-name">Egg Roll / Rollos Primavera</div>
+        <div class="card-desc">4 rollitos en masa primavera fritos rellenos de vegetales picosos al estilo japonés con salsa anguila, Fuji y agridulce.</div>
+        <div class="card-footer"><span class="card-price">$250</span><button class="add-btn">+</button></div>
+      </div>
+      <div class="card" onclick="addItem('Crab Balls',300,'')">
+        <div class="card-name">Crab Balls</div>
+        <div class="card-desc">3 croquetas de arroz fritas rellenas de cangrejo con queso crema.</div>
+        <div class="card-footer"><span class="card-price">$300</span><button class="add-btn">+</button></div>
       </div>
     </div>
-
-    <!-- ROLLS NORMALES -->
-    <div class="section" id="sec-normales">
-      <div class="sec-title">Rolls Normales</div>
-      <div class="sec-sub">9 rollos por orden</div>
-      <div class="grid">
-        <div class="card" style="border-color:#b8860b;background:linear-gradient(135deg,#141414 60%,#1a1500);" onclick="addItem('Sushi Premium de la Semana',0,'')">
-          <div style="font-size:9px;font-weight:800;letter-spacing:2px;color:#b8860b;margin-bottom:4px;text-transform:uppercase;">✦ Especial de la Semana</div>
-          <div class="card-name" style="color:#ffd700;">Sushi Premium de la Semana</div>
-          <div class="card-desc">Sushi sorpresa premium que revela sus ingredientes en la página de Instagram junto con el precio, con ingredientes de calidad y combinaciones exclusivas. 📸 <span style="color:#b8860b;font-weight:700;">@sushihouserd</span></div>
-          <div class="card-footer"><span class="card-price" style="color:#ffd700;">Ver en IG</span><button class="add-btn" style="background:#b8860b;">+</button></div>
-        </div>
-        <div class="card" onclick="addItem('Chicken Madurito Roll',400,'Pollo, plátano maduro y aguacate')">
-          <div class="card-name">Chicken Madurito Roll</div>
-          <div class="card-desc">9 rollos rellenos de pollo, plátano maduro y aguacate.</div>
-          <div class="card-footer"><span class="card-price">$400</span><button class="add-btn">+</button></div>
-        </div>
-        <div class="card" onclick="addItem('Sushi Burger Especial',400,'Carne angus, bacon, pepino y salsa Fuji')">
-          <div class="card-name">Sushi Burger Especial</div>
-          <div class="card-desc">9 rollos rellenos de carne angus, bacon, pepino y salsa Fuji.</div>
-          <div class="card-footer"><span class="card-price">$400</span><button class="add-btn">+</button></div>
-        </div>
-        <div class="card" onclick="addItem('Shrimp Supreme Roll',450,'Queso crema, camarones, pepino y zanahoria')">
-          <div class="card-name">Shrimp Supreme Roll</div>
-          <div class="card-desc">9 rollos rellenos de queso crema, camarones, pepino y zanahoria.</div>
-          <div class="card-footer"><span class="card-price">$450</span><button class="add-btn">+</button></div>
-        </div>
-        <div class="card" onclick="addItem('Shrimp Supreme Aplatanao',500,'Queso crema, camarón y plátano maduro')">
-          <div class="card-name">Shrimp Supreme Aplatanao</div>
-          <div class="card-desc">9 rollos rellenos de queso crema, camarón y plátano maduro.</div>
-          <div class="card-footer"><span class="card-price">$500</span><button class="add-btn">+</button></div>
-        </div>
-        <div class="card" onclick="addItem('Philadelphia Roll',550,'Salmón crudo, queso crema, pepino y zanahoria')">
-          <div class="card-name">Philadelphia Roll</div>
-          <div class="card-desc">9 rollos rellenos de salmón crudo, queso crema, pepino y zanahoria.</div>
-          <div class="card-footer"><span class="card-price">$550</span><button class="add-btn">+</button></div>
-        </div>
-        <div class="card" onclick="addItem('Spicy Tuna Roll',400,'Tuna picante, queso crema y alga nori')">
-          <div class="card-name">Spicy Tuna Roll 🌶</div>
-          <div class="card-desc">9 rollos de tuna picante con queso crema y alga nori.</div>
-          <div class="card-footer"><span class="card-price">$400</span><button class="add-btn">+</button></div>
-        </div>
-      </div>
-    </div>
-
-    <!-- ROLLS FRIED -->
-    <div class="section" id="sec-fried">
-      <div class="sec-title">Rolls Empanizados</div>
-      <div class="sec-sub">9 rollos fritos por orden</div>
-      <div class="grid">
-        <div class="card" style="border-color:#b8860b;background:linear-gradient(135deg,#141414 60%,#1a1500);" onclick="addItem('Sushi Premium de la Semana Empanizado',0,'')">
-          <div style="font-size:9px;font-weight:800;letter-spacing:2px;color:#b8860b;margin-bottom:4px;text-transform:uppercase;">✦ Especial de la Semana</div>
-          <div class="card-name" style="color:#ffd700;">Sushi Premium de la Semana Empanizado</div>
-          <div class="card-desc">Sushi sorpresa premium empanizado que revela sus ingredientes en la página de Instagram junto con el precio, con ingredientes de calidad y combinaciones exclusivas. 📸 <span style="color:#b8860b;font-weight:700;">@sushihouserd</span></div>
-          <div class="card-footer"><span class="card-price" style="color:#ffd700;">Ver en IG</span><button class="add-btn" style="background:#b8860b;">+</button></div>
-        </div>
-        <div class="card" onclick="addItem('Chicken Madurito Roll Fried',450,'Pollo, plátano maduro y aguacate — empanizado')">
-          <div class="card-name">Chicken Madurito Roll Fried</div>
-          <div class="card-desc">9 rollos empanizados rellenos de pollo, plátano maduro y aguacate.</div>
-          <div class="card-footer"><span class="card-price">$450</span><button class="add-btn">+</button></div>
-        </div>
-        <div class="card" onclick="addItem('Sushi Burger Especial Fried',450,'Carne angus, bacon, pepino y salsa Fuji — empanizado')">
-          <div class="card-name">Sushi Burger Especial Fried</div>
-          <div class="card-desc">9 rollos empanizados rellenos de carne angus, bacon, pepino y salsa Fuji.</div>
-          <div class="card-footer"><span class="card-price">$450</span><button class="add-btn">+</button></div>
-        </div>
-        <div class="card" onclick="addItem('Shrimp Supreme Roll Fried',500,'Queso crema, camarones, pepino y zanahoria — empanizado')">
-          <div class="card-name">Shrimp Supreme Roll Fried</div>
-          <div class="card-desc">9 rollos empanizados rellenos de queso crema, camarones, pepino y zanahoria.</div>
-          <div class="card-footer"><span class="card-price">$500</span><button class="add-btn">+</button></div>
-        </div>
-        <div class="card" onclick="addItem('Shrimp Supreme Aplatanao Fried',550,'Queso crema, camarón y plátano maduro — empanizado')">
-          <div class="card-name">Shrimp Supreme Aplatanao Fried</div>
-          <div class="card-desc">9 rollos empanizados rellenos de queso crema, camarón y plátano maduro.</div>
-          <div class="card-footer"><span class="card-price">$550</span><button class="add-btn">+</button></div>
-        </div>
-        <div class="card" onclick="addItem('Spicy Tuna Roll Fried',450,'Tuna picante, queso crema y alga nori — empanizado')">
-          <div class="card-name">Spicy Tuna Roll Fried 🌶</div>
-          <div class="card-desc">9 rollos empanizados de tuna picante con queso crema y alga nori.</div>
-          <div class="card-footer"><span class="card-price">$450</span><button class="add-btn">+</button></div>
-        </div>
-      </div>
-    </div>
-
-    <!-- PERSONALIZADO -->
-    <div class="section" id="sec-custom">
-      <div class="sec-title">Sushi Personalizado</div>
-      <div class="sec-sub">Arma tu roll perfecto</div>
-      <div class="builder">
-        <div class="b-title">Elige tu base</div>
-        <div class="base-row">
-          <button class="base-btn" id="bn" onclick="selectBase('normal',200)">Base Normal<br><small style="opacity:.7;">$200</small></button>
-          <button class="base-btn" id="be" onclick="selectBase('empanizado',250)">Base Empanizada<br><small style="opacity:.7;">$250</small></button>
-        </div>
-        <div class="b-title">Agrega ingredientes</div>
-        <div class="ingr-list" id="custom-ingr">
-          <div class="ingr-row" data-n="Bacon" data-p="50"><div><div class="ingr-name">Bacon</div><div class="ingr-price">+$50</div></div><button class="ingr-tog" onclick="togIngr(this,'custom')">+</button></div>
-          <div class="ingr-row" data-n="Plátano maduro" data-p="50"><div><div class="ingr-name">Plátano Maduro</div><div class="ingr-price">+$50</div></div><button class="ingr-tog" onclick="togIngr(this,'custom')">+</button></div>
-          <div class="ingr-row" data-n="Pollo" data-p="100"><div><div class="ingr-name">Pollo</div><div class="ingr-price">+$100</div></div><button class="ingr-tog" onclick="togIngr(this,'custom')">+</button></div>
-          <div class="ingr-row" data-n="Carne Angus" data-p="100"><div><div class="ingr-name">Carne Angus</div><div class="ingr-price">+$100</div></div><button class="ingr-tog" onclick="togIngr(this,'custom')">+</button></div>
-          <div class="ingr-row" data-n="Camarones" data-p="150"><div><div class="ingr-name">Camarones</div><div class="ingr-price">+$150</div></div><button class="ingr-tog" onclick="togIngr(this,'custom')">+</button></div>
-          <div class="ingr-row" data-n="Salmón" data-p="200"><div><div class="ingr-name">Salmón</div><div class="ingr-price">+$200</div></div><button class="ingr-tog" onclick="togIngr(this,'custom')">+</button></div>
-          <div class="ingr-row" data-n="Queso crema" data-p="50"><div><div class="ingr-name">Queso Crema</div><div class="ingr-price">+$50</div></div><button class="ingr-tog" onclick="togIngr(this,'custom')">+</button></div>
-          <div class="ingr-row" data-n="Pepino" data-p="25"><div><div class="ingr-name">Pepino</div><div class="ingr-price">+$25</div></div><button class="ingr-tog" onclick="togIngr(this,'custom')">+</button></div>
-          <div class="ingr-row" data-n="Zanahoria" data-p="25"><div><div class="ingr-name">Zanahoria</div><div class="ingr-price">+$25</div></div><button class="ingr-tog" onclick="togIngr(this,'custom')">+</button></div>
-          <div class="ingr-row" data-n="Aguacate" data-p="50"><div><div class="ingr-name">Aguacate</div><div class="ingr-price">+$50</div></div><button class="ingr-tog" onclick="togIngr(this,'custom')">+</button></div>
-          <!-- SUSHI EXTRA -->
-          <div class="ingr-row" id="extra-row" style="border-color:var(--red);background:rgba(204,0,0,0.05);">
-            <div><div class="ingr-name" style="color:var(--red);">🍣 Sushi Extra</div><div class="ingr-price">$50 c/u</div></div>
-            <div style="display:flex;align-items:center;gap:8px;">
-              <button class="qty-btn" onclick="chgExtra(-1)" style="width:26px;height:26px;">−</button>
-              <span class="qty-v" id="extra-qty" style="min-width:20px;text-align:center;font-weight:800;color:var(--red);">0</span>
-              <button class="qty-btn" onclick="chgExtra(1)" style="width:26px;height:26px;background:var(--red);">+</button>
-            </div>
-          </div>
-        </div>
-        <div class="b-total"><span class="b-total-lbl">Total estimado</span><span class="b-total-val" id="ctotal">$0</span></div>
-        <button class="b-add" id="cadd" onclick="addCustom('sushi')" disabled>Selecciona una base primero</button>
-      </div>
-    </div>
-
-    <!-- BOWL -->
-    <div class="section" id="sec-bowl">
-      <div class="sec-title">Sushi Bowl</div>
-      <div class="sec-sub">Arma tu bowl personalizado</div>
-      <div class="builder">
-        <div style="background:rgba(204,0,0,0.08);border:1px solid rgba(204,0,0,0.3);border-radius:8px;padding:10px 14px;margin-bottom:16px;">
-          <div style="font-size:12px;color:var(--red);font-weight:700;">✓ Base Arroz incluida — $250</div>
-        </div>
-        <div class="b-title">Agrega ingredientes</div>
-        <div class="ingr-list" id="bowl-ingr">
-          <div class="ingr-row" data-n="Bacon" data-p="75"><div><div class="ingr-name">Bacon</div><div class="ingr-price">+$75</div></div><button class="ingr-tog" onclick="togIngr(this,'bowl')">+</button></div>
-          <div class="ingr-row" data-n="Plátano maduro" data-p="75"><div><div class="ingr-name">Plátano Maduro</div><div class="ingr-price">+$75</div></div><button class="ingr-tog" onclick="togIngr(this,'bowl')">+</button></div>
-          <div class="ingr-row" data-n="Pollo" data-p="125"><div><div class="ingr-name">Pollo</div><div class="ingr-price">+$125</div></div><button class="ingr-tog" onclick="togIngr(this,'bowl')">+</button></div>
-          <div class="ingr-row" data-n="Carne Angus" data-p="125"><div><div class="ingr-name">Carne Angus</div><div class="ingr-price">+$125</div></div><button class="ingr-tog" onclick="togIngr(this,'bowl')">+</button></div>
-          <div class="ingr-row" data-n="Camarones" data-p="175"><div><div class="ingr-name">Camarones</div><div class="ingr-price">+$175</div></div><button class="ingr-tog" onclick="togIngr(this,'bowl')">+</button></div>
-          <div class="ingr-row" data-n="Salmón" data-p="225"><div><div class="ingr-name">Salmón</div><div class="ingr-price">+$225</div></div><button class="ingr-tog" onclick="togIngr(this,'bowl')">+</button></div>
-          <div class="ingr-row" data-n="Queso crema" data-p="75"><div><div class="ingr-name">Queso Crema</div><div class="ingr-price">+$75</div></div><button class="ingr-tog" onclick="togIngr(this,'bowl')">+</button></div>
-          <div class="ingr-row" data-n="Pepino rallado" data-p="50"><div><div class="ingr-name">Pepino Rallado</div><div class="ingr-price">+$50</div></div><button class="ingr-tog" onclick="togIngr(this,'bowl')">+</button></div>
-          <div class="ingr-row" data-n="Zanahoria rallada" data-p="50"><div><div class="ingr-name">Zanahoria Rallada</div><div class="ingr-price">+$50</div></div><button class="ingr-tog" onclick="togIngr(this,'bowl')">+</button></div>
-          <div class="ingr-row" data-n="Aguacate" data-p="75"><div><div class="ingr-name">Aguacate</div><div class="ingr-price">+$75</div></div><button class="ingr-tog" onclick="togIngr(this,'bowl')">+</button></div>
-        </div>
-        <div class="b-total"><span class="b-total-lbl">Total bowl</span><span class="b-total-val" id="btotal">$250</span></div>
-        <button class="b-add" onclick="addCustom('bowl')">Agregar Bowl al Carrito</button>
-      </div>
-    </div>
-
-    <!-- PARTY -->
-    <div class="section" id="sec-party">
-      <div class="sec-title">Sushi Party 🎉</div>
-      <div class="sec-sub">Bandejas mixtas para compartir</div>
-      <div class="grid">
-        <div class="card" onclick="addItem('Bandeja Mixta 20 Rolls',1200,'Bandeja mixta 20 rolls variados')">
-          <div class="card-name">Bandeja Mixta 20 Rolls</div>
-          <div class="card-desc">Surtido de rolls variados para compartir.</div>
-          <div class="card-footer"><span class="card-price">$1,200</span><button class="add-btn">+</button></div>
-        </div>
-        <div class="card" onclick="addItem('Bandeja Mixta 40 Rolls',2400,'Bandeja mixta 40 rolls variados')">
-          <div class="card-name">Bandeja Mixta 40 Rolls</div>
-          <div class="card-desc">Surtido grande de rolls para la fiesta.</div>
-          <div class="card-footer"><span class="card-price">$2,400</span><button class="add-btn">+</button></div>
-        </div>
-      </div>
-    </div>
-
-    <!-- BEBIDAS -->
-    <div class="section" id="sec-bebidas">
-      <div class="sec-title">Bebidas</div>
-      <div class="sec-sub">Para acompañar tu orden</div>
-      <div class="grid">
-        <div class="card" onclick="addItem('Fruit Punch',100,'')"><div class="card-name">Fruit Punch</div><div class="card-footer"><span class="card-price">$100</span><button class="add-btn">+</button></div></div>
-        <div class="card" onclick="addItem('Chinola',100,'')"><div class="card-name">Chinola</div><div class="card-footer"><span class="card-price">$100</span><button class="add-btn">+</button></div></div>
-        <div class="card" onclick="addItem('Refresco Pequeño',20,'')"><div class="card-name">Refresco Pequeño</div><div class="card-footer"><span class="card-price">$20</span><button class="add-btn">+</button></div></div>
-        <div class="card" onclick="addItem('Refresco Normal',30,'')"><div class="card-name">Refresco Normal</div><div class="card-footer"><span class="card-price">$30</span><button class="add-btn">+</button></div></div>
-      </div>
-    </div>
-
-  </div><!-- end menu-col -->
-
-  <!-- SIDEBAR -->
-  <div class="sidebar" id="sidebar">
-    <div class="sb-head">
-      <div class="sb-title">🛒 Tu Orden</div>
-      <button class="sb-close" onclick="toggleCart()">✕</button>
-    </div>
-    <div class="cart-body" id="cart-body">
-      <div class="cart-empty" id="cart-empty">
-        <div class="ce-icon">🍱</div>
-        <div class="ce-txt">Carrito vacío</div>
-      </div>
-    </div>
-    <div class="order-form">
-      <div class="fg">
-        <label class="fl">Nombre del cliente</label>
-        <input class="fi" id="cname" type="text" placeholder="Tu nombre...">
-      </div>
-      <div class="fg">
-        <label class="fl">Delivery</label>
-        <div class="tog-row">
-          <button class="tog-btn on" id="dno" onclick="setDel(false)">Sin delivery</button>
-          <button class="tog-btn" id="dyes" onclick="setDel(true)">+ Delivery $100</button>
-        </div>
-      </div>
-      <div class="fg">
-        <label class="fl">Método de pago</label>
-        <div class="tog-row">
-          <button class="tog-btn" id="pcash" onclick="setPago('Efectivo')">💵 Efectivo</button>
-          <button class="tog-btn" id="ptrans" onclick="setPago('Transferencia')">📱 Transferencia</button>
-        </div>
-      </div>
-    </div>
-    <div class="total-row">
-      <span class="total-lbl">Total RD$</span>
-      <span class="total-val" id="cart-total">0</span>
-    </div>
-    <button class="wa-btn disabled" id="wa-btn" onclick="sendWA()">
-      <svg viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
-      Enviar Pedido
-    </button>
   </div>
 
+  <!-- SUSHIS PREMIUM -->
+  <div class="section" id="sec-premium">
+    <div class="sec-title gold">✦ Sushis Premium</div>
+    <div class="sec-sub">Combinaciones exclusivas — elige normal o empanizado</div>
+    <div class="grid" id="premium-grid">
+
+      <!-- Golden Dragon -->
+      <div class="card gold-card">
+        <div style="font-size:9px;font-weight:800;letter-spacing:2px;color:var(--gold);margin-bottom:4px;">✦ PREMIUM</div>
+        <div class="card-name gold">Golden Dragón</div>
+        <div class="card-desc">Roll relleno de camarones, queso de cabra y pepino con topping de bacon caramelizado bañado en miel casera y láminas de oro comestible.</div>
+        <div class="premium-toggle">
+          <button class="pt-btn" id="pt-gd-n" onclick="selPremium('gd','normal',650)">Normal $650</button>
+          <button class="pt-btn" id="pt-gd-f" onclick="selPremium('gd','fried',700)">Frito $700</button>
+        </div>
+        <div class="card-footer">
+          <span class="card-price gold" id="pp-gd">$650 / $700</span>
+          <button class="add-btn gold-btn" onclick="addPremium('gd','Golden Dragón',650,700)">+</button>
+        </div>
+      </div>
+
+      <!-- Sweet Pine Roll -->
+      <div class="card gold-card">
+        <div style="font-size:9px;font-weight:800;letter-spacing:2px;color:var(--gold);margin-bottom:4px;">✦ PREMIUM</div>
+        <div class="card-name gold">Sweet Pine Roll</div>
+        <div class="card-desc">Roll relleno de pollo empanizado, queso crema, aguacate, bacon, con topping de piña caramelizada.</div>
+        <div class="premium-toggle">
+          <button class="pt-btn" id="pt-sp-n" onclick="selPremium('sp','normal',600)">Normal $600</button>
+          <button class="pt-btn" id="pt-sp-f" onclick="selPremium('sp','fried',650)">Frito $650</button>
+        </div>
+        <div class="card-footer">
+          <span class="card-price gold" id="pp-sp">$600 / $650</span>
+          <button class="add-btn gold-btn" onclick="addPremium('sp','Sweet Pine Roll',600,650)">+</button>
+        </div>
+      </div>
+
+      <!-- Hamburguesa XL -->
+      <div class="card gold-card">
+        <div style="font-size:9px;font-weight:800;letter-spacing:2px;color:var(--gold);margin-bottom:4px;">✦ PREMIUM</div>
+        <div class="card-name gold">Hamburguesa XL</div>
+        <div class="card-desc">Hamburguesa a base de arroz empanizado, rellena de queso crema, bacon, carne angus, pepino, salsa Fuji, anguila y salsa agridulce.</div>
+        <div class="card-footer">
+          <span class="card-price gold">$700</span>
+          <button class="add-btn gold-btn" onclick="addItem('Hamburguesa XL Premium',700,'')">+</button>
+        </div>
+      </div>
+
+      <!-- Green Roll Crab -->
+      <div class="card gold-card">
+        <div style="font-size:9px;font-weight:800;letter-spacing:2px;color:var(--gold);margin-bottom:4px;">✦ PREMIUM</div>
+        <div class="card-name gold">Green Roll Crab</div>
+        <div class="card-desc">Roll envuelto en alga nori por fuera, relleno de queso de cabra, pepino, camarón tempura y plátano maduro con topping de cangrejo.</div>
+        <div class="premium-toggle">
+          <button class="pt-btn" id="pt-gr-n" onclick="selPremium('gr','normal',750)">Normal $750</button>
+          <button class="pt-btn" id="pt-gr-f" onclick="selPremium('gr','fried',800)">Frito $800</button>
+        </div>
+        <div class="card-footer">
+          <span class="card-price gold" id="pp-gr">$750 / $800</span>
+          <button class="add-btn gold-btn" onclick="addPremium('gr','Green Roll Crab',750,800)">+</button>
+        </div>
+      </div>
+
+      <!-- Hamburguesa XXL -->
+      <div class="card gold-card">
+        <div style="font-size:9px;font-weight:800;letter-spacing:2px;color:var(--gold);margin-bottom:4px;">✦ PREMIUM ESPECIAL</div>
+        <div class="card-name gold">Hamburguesa XXL Mar y Tierra</div>
+        <div class="card-desc">Hamburguesa a base de arroz empanizado, rellena de queso crema, bacon, pollo, camarón, salmón empanizado, pepino, salsa Fuji, anguila y salsa agridulce.</div>
+        <div class="card-footer">
+          <span class="card-price gold">$1,000</span>
+          <button class="add-btn gold-btn" onclick="addItem('Hamburguesa XXL Mar y Tierra Premium',1000,'')">+</button>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- ROLLS NORMALES -->
+  <div class="section" id="sec-normales">
+    <div class="sec-title">Rolls Normales</div>
+    <div class="sec-sub">9 rollos por orden</div>
+    <div class="grid">
+      <div class="card" onclick="addItem('Chicken Madurito Roll',400,'')">
+        <div class="card-name">Chicken Madurito Roll</div>
+        <div class="card-desc">9 rollos rellenos de pollo, plátano maduro y aguacate.</div>
+        <div class="card-footer"><span class="card-price">$400</span><button class="add-btn">+</button></div>
+      </div>
+      <div class="card" onclick="addItem('Sushi Burger Especial',400,'')">
+        <div class="card-name">Sushi Burger Especial</div>
+        <div class="card-desc">9 rollos rellenos de carne angus, bacon, pepino y salsa Fuji.</div>
+        <div class="card-footer"><span class="card-price">$400</span><button class="add-btn">+</button></div>
+      </div>
+      <div class="card" onclick="addItem('Shrimp Supreme Roll',450,'')">
+        <div class="card-name">Shrimp Supreme Roll</div>
+        <div class="card-desc">9 rollos rellenos de queso crema, camarones, pepino y zanahoria.</div>
+        <div class="card-footer"><span class="card-price">$450</span><button class="add-btn">+</button></div>
+      </div>
+      <div class="card" onclick="addItem('Shrimp Supreme Aplatanao',500,'')">
+        <div class="card-name">Shrimp Supreme Aplatanao</div>
+        <div class="card-desc">9 rollos rellenos de queso crema, camarón y plátano maduro.</div>
+        <div class="card-footer"><span class="card-price">$500</span><button class="add-btn">+</button></div>
+      </div>
+      <div class="card" onclick="addItem('Philadelphia Roll',550,'')">
+        <div class="card-name">Philadelphia Roll</div>
+        <div class="card-desc">9 rollos rellenos de salmón crudo, queso crema, pepino y zanahoria.</div>
+        <div class="card-footer"><span class="card-price">$550</span><button class="add-btn">+</button></div>
+      </div>
+      <div class="card" onclick="addItem('Spicy Tuna Roll',400,'')">
+        <div class="card-name">Spicy Tuna Roll 🌶</div>
+        <div class="card-desc">9 rollos de tuna picante con queso crema y alga nori.</div>
+        <div class="card-footer"><span class="card-price">$400</span><button class="add-btn">+</button></div>
+      </div>
+      <div class="card" onclick="addItem('Spicy Crab Roll',450,'')">
+        <div class="card-name">Spicy Crab Roll 🌶</div>
+        <div class="card-desc">9 rollos rellenos de dip de cangrejo spicy con salsa Fuji, miel y anguila por encima.</div>
+        <div class="card-footer"><span class="card-price">$450</span><button class="add-btn">+</button></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ROLLS FRIED -->
+  <div class="section" id="sec-fried">
+    <div class="sec-title">Rolls Empanizados</div>
+    <div class="sec-sub">9 rollos fritos por orden</div>
+    <div class="grid">
+      <div class="card" onclick="addItem('Chicken Madurito Roll Fried',450,'')">
+        <div class="card-name">Chicken Madurito Roll Fried</div>
+        <div class="card-desc">9 rollos empanizados rellenos de pollo, plátano maduro y aguacate.</div>
+        <div class="card-footer"><span class="card-price">$450</span><button class="add-btn">+</button></div>
+      </div>
+      <div class="card" onclick="addItem('Sushi Burger Especial Fried',450,'')">
+        <div class="card-name">Sushi Burger Especial Fried</div>
+        <div class="card-desc">9 rollos empanizados rellenos de carne angus, bacon, pepino y salsa Fuji.</div>
+        <div class="card-footer"><span class="card-price">$450</span><button class="add-btn">+</button></div>
+      </div>
+      <div class="card" onclick="addItem('Shrimp Supreme Roll Fried',500,'')">
+        <div class="card-name">Shrimp Supreme Roll Fried</div>
+        <div class="card-desc">9 rollos empanizados rellenos de queso crema, camarones, pepino y zanahoria.</div>
+        <div class="card-footer"><span class="card-price">$500</span><button class="add-btn">+</button></div>
+      </div>
+      <div class="card" onclick="addItem('Shrimp Supreme Aplatanao Fried',550,'')">
+        <div class="card-name">Shrimp Supreme Aplatanao Fried</div>
+        <div class="card-desc">9 rollos empanizados rellenos de queso crema, camarón y plátano maduro.</div>
+        <div class="card-footer"><span class="card-price">$550</span><button class="add-btn">+</button></div>
+      </div>
+      <div class="card" onclick="addItem('Spicy Tuna Roll Fried',450,'')">
+        <div class="card-name">Spicy Tuna Roll Fried 🌶</div>
+        <div class="card-desc">9 rollos empanizados de tuna picante con queso crema y alga nori.</div>
+        <div class="card-footer"><span class="card-price">$450</span><button class="add-btn">+</button></div>
+      </div>
+      <div class="card" onclick="addItem('Tempura Roll',550,'')">
+        <div class="card-name">Tempura Roll</div>
+        <div class="card-desc">9 rollos empanizados rellenos de queso crema, camarones tempura, aguacate y plátano maduro.</div>
+        <div class="card-footer"><span class="card-price">$550</span><button class="add-btn">+</button></div>
+      </div>
+      <div class="card" onclick="addItem('Spicy Crab Roll Fried',500,'')">
+        <div class="card-name">Spicy Crab Roll Fried 🌶</div>
+        <div class="card-desc">9 rollos empanizados rellenos de dip de cangrejo spicy con salsa Fuji, miel y anguila por encima.</div>
+        <div class="card-footer"><span class="card-price">$500</span><button class="add-btn">+</button></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- PERSONALIZADO -->
+  <div class="section" id="sec-custom">
+    <div class="sec-title">Sushi Personalizado</div>
+    <div class="sec-sub">Arma tu roll perfecto</div>
+    <div class="builder">
+      <div class="b-title">Elige tu base</div>
+      <div class="base-row">
+        <button class="base-btn" id="bn" onclick="selectBase('normal',200)">Base Normal<br><small style="opacity:.7;">$200</small></button>
+        <button class="base-btn" id="be" onclick="selectBase('empanizado',250)">Base Empanizada<br><small style="opacity:.7;">$250</small></button>
+      </div>
+      <div class="b-title">Agrega ingredientes</div>
+      <div class="ingr-list" id="custom-ingr">
+        <div class="ingr-row" style="border-color:#25D366;background:rgba(37,211,102,0.05);"><div><div class="ingr-name" style="color:#25D366;">🌶 Salsa Picante</div><div class="ingr-price" style="color:#25D366;">Gratis</div></div><button class="ingr-tog" onclick="togIngr(this,'custom')" data-free="true" style="border-color:#25D366;color:#25D366;" data-n="Salsa picante" data-p="0">+</button></div>
+        <div class="ingr-row" data-n="Bacon" data-p="50"><div><div class="ingr-name">Bacon</div><div class="ingr-price">+$50</div></div><button class="ingr-tog" onclick="togIngr(this,'custom')">+</button></div>
+        <div class="ingr-row" data-n="Plátano maduro" data-p="50"><div><div class="ingr-name">Plátano Maduro</div><div class="ingr-price">+$50</div></div><button class="ingr-tog" onclick="togIngr(this,'custom')">+</button></div>
+        <div class="ingr-row" data-n="Pollo" data-p="100"><div><div class="ingr-name">Pollo</div><div class="ingr-price">+$100</div></div><button class="ingr-tog" onclick="togIngr(this,'custom')">+</button></div>
+        <div class="ingr-row" data-n="Carne Angus" data-p="100"><div><div class="ingr-name">Carne Angus</div><div class="ingr-price">+$100</div></div><button class="ingr-tog" onclick="togIngr(this,'custom')">+</button></div>
+        <div class="ingr-row" data-n="Camarones" data-p="150"><div><div class="ingr-name">Camarones</div><div class="ingr-price">+$150</div></div><button class="ingr-tog" onclick="togIngr(this,'custom')">+</button></div>
+        <div class="ingr-row" data-n="Camarón Tempura" data-p="200"><div><div class="ingr-name">Camarón Tempura</div><div class="ingr-price">+$200</div></div><button class="ingr-tog" onclick="togIngr(this,'custom')">+</button></div>
+        <div class="ingr-row" data-n="Cangrejo" data-p="150"><div><div class="ingr-name">Cangrejo</div><div class="ingr-price">+$150</div></div><button class="ingr-tog" onclick="togIngr(this,'custom')">+</button></div>
+        <div class="ingr-row" data-n="Salmón" data-p="200"><div><div class="ingr-name">Salmón</div><div class="ingr-price">+$200</div></div><button class="ingr-tog" onclick="togIngr(this,'custom')">+</button></div>
+        <div class="ingr-row" data-n="Salmón Empanizado" data-p="250"><div><div class="ingr-name">Salmón Empanizado</div><div class="ingr-price">+$250</div></div><button class="ingr-tog" onclick="togIngr(this,'custom')">+</button></div>
+        <div class="ingr-row" data-n="Queso Crema" data-p="50"><div><div class="ingr-name">Queso Crema</div><div class="ingr-price">+$50</div></div><button class="ingr-tog" onclick="togIngr(this,'custom')">+</button></div>
+        <div class="ingr-row" data-n="Queso de Cabra" data-p="75"><div><div class="ingr-name">Queso de Cabra</div><div class="ingr-price">+$75</div></div><button class="ingr-tog" onclick="togIngr(this,'custom')">+</button></div>
+        <div class="ingr-row" data-n="Pepino" data-p="25"><div><div class="ingr-name">Pepino</div><div class="ingr-price">+$25</div></div><button class="ingr-tog" onclick="togIngr(this,'custom')">+</button></div>
+        <div class="ingr-row" data-n="Zanahoria" data-p="25"><div><div class="ingr-name">Zanahoria</div><div class="ingr-price">+$25</div></div><button class="ingr-tog" onclick="togIngr(this,'custom')">+</button></div>
+        <div class="ingr-row" data-n="Aguacate" data-p="50"><div><div class="ingr-name">Aguacate</div><div class="ingr-price">+$50</div></div><button class="ingr-tog" onclick="togIngr(this,'custom')">+</button></div>
+        <div class="ingr-row" id="extra-row" style="border-color:var(--red);background:rgba(204,0,0,0.05);">
+          <div><div class="ingr-name" style="color:var(--red);">🍣 Sushi Extra</div><div class="ingr-price">$50 c/u</div></div>
+          <div style="display:flex;align-items:center;gap:8px;">
+            <button class="qty-btn" onclick="chgExtra(-1)" style="width:26px;height:26px;">−</button>
+            <span class="qty-v" id="extra-qty" style="min-width:20px;text-align:center;font-weight:800;color:var(--red);">0</span>
+            <button class="qty-btn" onclick="chgExtra(1)" style="width:26px;height:26px;background:var(--red);">+</button>
+          </div>
+        </div>
+      </div>
+      <div class="b-total"><span class="b-total-lbl">Total estimado</span><span class="b-total-val" id="ctotal">$0</span></div>
+      <button class="b-add" id="cadd" onclick="addCustom('sushi')" disabled>Selecciona una base primero</button>
+    </div>
+  </div>
+
+  <!-- BOWL -->
+  <div class="section" id="sec-bowl">
+    <div class="sec-title">Sushi Bowl</div>
+    <div class="sec-sub">Arma tu bowl personalizado</div>
+    <div class="builder">
+      <div style="background:rgba(204,0,0,0.08);border:1px solid rgba(204,0,0,0.3);border-radius:8px;padding:10px 14px;margin-bottom:16px;">
+        <div style="font-size:12px;color:var(--red);font-weight:700;">✓ Base Arroz incluida — $250</div>
+      </div>
+      <div class="b-title">Agrega ingredientes</div>
+      <div class="ingr-list" id="bowl-ingr">
+        <div class="ingr-row" style="border-color:#25D366;background:rgba(37,211,102,0.05);"><div><div class="ingr-name" style="color:#25D366;">🌶 Salsa Picante</div><div class="ingr-price" style="color:#25D366;">Gratis</div></div><button class="ingr-tog" onclick="togIngr(this,'bowl')" data-n="Salsa picante" data-p="0" style="border-color:#25D366;color:#25D366;">+</button></div>
+        <div class="ingr-row" data-n="Bacon" data-p="75"><div><div class="ingr-name">Bacon</div><div class="ingr-price">+$75</div></div><button class="ingr-tog" onclick="togIngr(this,'bowl')">+</button></div>
+        <div class="ingr-row" data-n="Plátano maduro" data-p="75"><div><div class="ingr-name">Plátano Maduro</div><div class="ingr-price">+$75</div></div><button class="ingr-tog" onclick="togIngr(this,'bowl')">+</button></div>
+        <div class="ingr-row" data-n="Pollo" data-p="125"><div><div class="ingr-name">Pollo</div><div class="ingr-price">+$125</div></div><button class="ingr-tog" onclick="togIngr(this,'bowl')">+</button></div>
+        <div class="ingr-row" data-n="Carne Angus" data-p="125"><div><div class="ingr-name">Carne Angus</div><div class="ingr-price">+$125</div></div><button class="ingr-tog" onclick="togIngr(this,'bowl')">+</button></div>
+        <div class="ingr-row" data-n="Camarones" data-p="175"><div><div class="ingr-name">Camarones</div><div class="ingr-price">+$175</div></div><button class="ingr-tog" onclick="togIngr(this,'bowl')">+</button></div>
+        <div class="ingr-row" data-n="Camarón Tempura" data-p="225"><div><div class="ingr-name">Camarón Tempura</div><div class="ingr-price">+$225</div></div><button class="ingr-tog" onclick="togIngr(this,'bowl')">+</button></div>
+        <div class="ingr-row" data-n="Cangrejo" data-p="175"><div><div class="ingr-name">Cangrejo</div><div class="ingr-price">+$175</div></div><button class="ingr-tog" onclick="togIngr(this,'bowl')">+</button></div>
+        <div class="ingr-row" data-n="Salmón" data-p="225"><div><div class="ingr-name">Salmón</div><div class="ingr-price">+$225</div></div><button class="ingr-tog" onclick="togIngr(this,'bowl')">+</button></div>
+        <div class="ingr-row" data-n="Salmón Empanizado" data-p="275"><div><div class="ingr-name">Salmón Empanizado</div><div class="ingr-price">+$275</div></div><button class="ingr-tog" onclick="togIngr(this,'bowl')">+</button></div>
+        <div class="ingr-row" data-n="Queso Crema" data-p="75"><div><div class="ingr-name">Queso Crema</div><div class="ingr-price">+$75</div></div><button class="ingr-tog" onclick="togIngr(this,'bowl')">+</button></div>
+        <div class="ingr-row" data-n="Queso de Cabra" data-p="100"><div><div class="ingr-name">Queso de Cabra</div><div class="ingr-price">+$100</div></div><button class="ingr-tog" onclick="togIngr(this,'bowl')">+</button></div>
+        <div class="ingr-row" data-n="Pepino rallado" data-p="50"><div><div class="ingr-name">Pepino Rallado</div><div class="ingr-price">+$50</div></div><button class="ingr-tog" onclick="togIngr(this,'bowl')">+</button></div>
+        <div class="ingr-row" data-n="Zanahoria rallada" data-p="50"><div><div class="ingr-name">Zanahoria Rallada</div><div class="ingr-price">+$50</div></div><button class="ingr-tog" onclick="togIngr(this,'bowl')">+</button></div>
+        <div class="ingr-row" data-n="Aguacate" data-p="75"><div><div class="ingr-name">Aguacate</div><div class="ingr-price">+$75</div></div><button class="ingr-tog" onclick="togIngr(this,'bowl')">+</button></div>
+      </div>
+      <div class="b-total"><span class="b-total-lbl">Total bowl</span><span class="b-total-val" id="btotal">$250</span></div>
+      <button class="b-add" onclick="addCustom('bowl')">Agregar Bowl al Carrito</button>
+    </div>
+  </div>
+
+  <!-- SUSHI PARTY -->
+  <div class="section" id="sec-party">
+    <div class="sec-title">Sushi Party 🎉</div>
+    <div class="sec-sub">Bandejas mixtas para compartir</div>
+    <div class="grid">
+      <div class="card" onclick="addItem('Bandeja Mixta 20 Rolls',1200,'')">
+        <div class="card-name">Bandeja Mixta 20 Rolls</div>
+        <div class="card-desc">Surtido de rolls variados para compartir.</div>
+        <div class="card-footer"><span class="card-price">$1,200</span><button class="add-btn">+</button></div>
+      </div>
+      <div class="card" onclick="addItem('Bandeja Mixta 40 Rolls',2400,'')">
+        <div class="card-name">Bandeja Mixta 40 Rolls</div>
+        <div class="card-desc">Surtido grande de rolls variados para la fiesta.</div>
+        <div class="card-footer"><span class="card-price">$2,400</span><button class="add-btn">+</button></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- COMBOS -->
+  <div class="section" id="sec-combos">
+    <div class="sec-title gold">🎁 Combo Ahorro Premium</div>
+    <div class="sec-sub" style="color:var(--gold);font-style:italic;">"porque ahorrando también se come premium"</div>
+    <div class="grid">
+      <div class="combo-card">
+        <div class="combo-num">Combo 1</div>
+        <div class="combo-name">Golden Dragón Fried + Sweet Pine Roll + Crab Ball</div>
+        <div class="combo-desc">Golden Dragón empanizado + Sweet Pine Roll + Crab Balls.</div>
+        <div class="combo-footer">
+          <span class="combo-price">$1,400</span>
+          <button class="add-btn gold-btn" onclick="addItem('Combo 1 — Golden Dragón Fried + Sweet Pine Roll + Crab Ball',1400,'')">+</button>
+        </div>
+      </div>
+      <div class="combo-card">
+        <div class="combo-num">Combo 2</div>
+        <div class="combo-name">Hamburguesa XXL Mar y Tierra + Hamburguesa XL</div>
+        <div class="combo-desc">La dupla premium más poderosa del menú.</div>
+        <div class="combo-footer">
+          <span class="combo-price">$1,500</span>
+          <button class="add-btn gold-btn" onclick="addItem('Combo 2 — Hamburguesa XXL Mar y Tierra + Hamburguesa XL',1500,'')">+</button>
+        </div>
+      </div>
+      <div class="combo-card">
+        <div class="combo-num">Combo 3</div>
+        <div class="combo-name">Green Roll Crab Fried + Golden Dragón + Egg Roll</div>
+        <div class="combo-desc">Green Roll Crab empanizado + Golden Dragón normal + Egg Roll.</div>
+        <div class="combo-footer">
+          <span class="combo-price">$1,500</span>
+          <button class="add-btn gold-btn" onclick="addItem('Combo 3 — Green Roll Crab Fried + Golden Dragón + Egg Roll',1500,'')">+</button>
+        </div>
+      </div>
+      <div class="combo-card">
+        <div class="combo-num">Combo 4</div>
+        <div class="combo-name">Hamburguesa XL + Sweet Pine Roll Fried + Jugo</div>
+        <div class="combo-desc">Hamburguesa XL + Sweet Pine Roll empanizado + bebida incluida.</div>
+        <div class="combo-footer">
+          <span class="combo-price">$1,350</span>
+          <button class="add-btn gold-btn" onclick="addItem('Combo 4 — Hamburguesa XL + Sweet Pine Roll Fried + Jugo',1350,'')">+</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- BEBIDAS -->
+  <div class="section" id="sec-bebidas">
+    <div class="sec-title">Bebidas</div>
+    <div class="sec-sub">Para acompañar tu orden</div>
+    <div class="grid">
+      <div class="card" onclick="addItem('Fruit Punch',100,'')"><div class="card-name">Fruit Punch</div><div class="card-footer"><span class="card-price">$100</span><button class="add-btn">+</button></div></div>
+      <div class="card" onclick="addItem('Chinola',100,'')"><div class="card-name">Chinola</div><div class="card-footer"><span class="card-price">$100</span><button class="add-btn">+</button></div></div>
+      <div class="card" onclick="addItem('Refresco Pequeño',20,'')"><div class="card-name">Refresco Pequeño</div><div class="card-footer"><span class="card-price">$20</span><button class="add-btn">+</button></div></div>
+      <div class="card" onclick="addItem('Refresco Normal',30,'')"><div class="card-name">Refresco Normal</div><div class="card-footer"><span class="card-price">$30</span><button class="add-btn">+</button></div></div>
+    </div>
+  </div>
+
+</div><!-- end menu-col -->
+
+<!-- SIDEBAR -->
+<div class="sidebar" id="sidebar">
+  <div class="sb-head">
+    <div class="sb-title">🛒 Tu Orden</div>
+    <button class="sb-close" onclick="toggleCart()">✕</button>
+  </div>
+  <div class="cart-body" id="cart-body">
+    <div class="cart-empty" id="cart-empty">
+      <div class="ce-icon">🍱</div>
+      <div class="ce-txt">Carrito vacío</div>
+    </div>
+  </div>
+  <div class="order-form">
+    <div class="fg">
+      <label class="fl">Nombre del cliente <span style="color:var(--red);">*</span></label>
+      <input class="fi" id="cname" type="text" placeholder="Tu nombre...">
+    </div>
+    <div class="fg">
+      <label class="fl">Delivery</label>
+      <div class="tog-row">
+        <button class="tog-btn on" id="dno" onclick="setDel(false)">Sin delivery</button>
+        <button class="tog-btn" id="dyes" onclick="setDel(true)">+ Delivery $100</button>
+      </div>
+    </div>
+    <div class="fg">
+      <label class="fl">Método de pago</label>
+      <div class="tog-row">
+        <button class="tog-btn" id="pcash" onclick="setPago('Efectivo')">💵 Efectivo</button>
+        <button class="tog-btn" id="ptrans" onclick="setPago('Transferencia')">📱 Transferencia</button>
+      </div>
+    </div>
+    <div class="fg">
+      <label class="fl">📝 Nota del pedido <span style="color:#555;font-weight:400;letter-spacing:0;">(opcional)</span></label>
+      <textarea class="fi" id="cnota" rows="2" placeholder="Ej: sin pepino, extra salsa, alergia a..." style="resize:none;line-height:1.4;"></textarea>
+    </div>
+  </div>
+  <div class="total-row">
+    <span class="total-lbl">Total RD$</span>
+    <span class="total-val" id="cart-total">0</span>
+  </div>
+  <button class="wa-btn disabled" id="wa-btn" onclick="openSalsaModal()">
+    <svg viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+    Enviar Pedido
+  </button>
 </div>
+</div><!-- end layout -->
 
 <script>
 let cart=[], delivery=false, pago='', cBase=null, cBaseP=0, cIngrs=[], bIngrs=[], cExtra=0;
+let premiumSel={}; // {id: 'normal'|'fried'}
+let modalSalsas=[]; // array of {name, price}
 
+// ── NAV ──
 function showSec(id,btn){
   document.querySelectorAll('.section').forEach(s=>s.classList.remove('active'));
   document.querySelectorAll('.nav-btn').forEach(b=>b.classList.remove('active'));
@@ -411,14 +637,32 @@ function showSec(id,btn){
 
 function toggleCart(){document.getElementById('sidebar').classList.toggle('open');}
 
-function addItem(name,price,detail){
-  const ex=cart.find(i=>i.name===name&&i.detail===detail&&!i.custom);
+// ── PREMIUM TOGGLE ──
+function selPremium(id, type, price){
+  premiumSel[id]=type;
+  const n=document.getElementById('pt-'+id+'-n');
+  const f=document.getElementById('pt-'+id+'-f');
+  if(n) n.classList.toggle('sel', type==='normal');
+  if(f) f.classList.toggle('sel', type==='fried');
+}
+
+function addPremium(id, name, priceN, priceF){
+  const sel = premiumSel[id];
+  if(!sel){ alert('Elige Normal o Frito primero'); return; }
+  const price = sel==='normal' ? priceN : priceF;
+  const label = sel==='normal' ? name+' (Normal)' : name+' (Frito/Empanizado)';
+  addItem(label, price, '');
+}
+
+// ── ADD ITEM ──
+function addItem(name, price, detail){
+  const ex=cart.find(i=>i.name===name&&!i.custom);
   if(ex){ex.qty++;}else{cart.push({id:Date.now()+Math.random(),name,price,detail,qty:1});}
   renderCart();
-  // flash badge
   const b=document.getElementById('cbadge');b.style.transform='scale(1.4)';setTimeout(()=>b.style.transform='',200);
 }
 
+// ── CUSTOM SUSHI ──
 function selectBase(t,p){
   cBase=t==='normal'?'base normal':'base empanizada'; cBaseP=p;
   document.getElementById('bn').classList.toggle('sel',t==='normal');
@@ -429,20 +673,16 @@ function selectBase(t,p){
 
 function togIngr(btn,type){
   const row=btn.closest('.ingr-row');
-  const n=row.dataset.n, p=parseInt(row.dataset.p);
+  const n=row.dataset.n||btn.dataset.n;
+  const p=parseInt(row.dataset.p||btn.dataset.p||0);
   const arr=type==='custom'?cIngrs:bIngrs;
   const idx=arr.findIndex(i=>i.n===n);
   if(idx>-1){arr.splice(idx,1);row.classList.remove('sel');btn.textContent='+';}
   else{arr.push({n,p});row.classList.add('sel');btn.textContent='✓';}
-  if(type==='custom') updateCT();
-  else updateBT();
+  if(type==='custom') updateCT(); else updateBT();
 }
 
-function chgExtra(d){
-  cExtra=Math.max(0, cExtra+d);
-  document.getElementById('extra-qty').textContent=cExtra;
-  updateCT();
-}
+function chgExtra(d){cExtra=Math.max(0,cExtra+d);document.getElementById('extra-qty').textContent=cExtra;updateCT();}
 
 function updateCT(){
   const t=cBaseP+cIngrs.reduce((s,i)=>s+i.p,0)+(cExtra*50);
@@ -459,10 +699,10 @@ function addCustom(type){
     if(!cBase){alert('Selecciona una base primero');return;}
     const t=cBaseP+cIngrs.reduce((s,i)=>s+i.p,0)+(cExtra*50);
     const parts=[cBase,...cIngrs.map(i=>i.n)];
-    if(cExtra>0) parts.push(`${cExtra}x sushi extra`);
+    if(cExtra>0) parts.push(cExtra+'x sushi extra');
     cart.push({id:Date.now(),name:'Sushi Personalizado',price:t,detail:parts.join(', '),qty:1,custom:true});
     cBase=null;cBaseP=0;cIngrs=[];cExtra=0;
-    document.querySelectorAll('#custom-ingr .ingr-row').forEach(r=>{r.classList.remove('sel');r.querySelector('.ingr-tog') && (r.querySelector('.ingr-tog').textContent='+');});
+    document.querySelectorAll('#custom-ingr .ingr-row').forEach(r=>{r.classList.remove('sel');const tog=r.querySelector('.ingr-tog');if(tog)tog.textContent='+';});
     document.getElementById('bn').classList.remove('sel');
     document.getElementById('be').classList.remove('sel');
     document.getElementById('ctotal').textContent='$0';
@@ -480,15 +720,16 @@ function addCustom(type){
   renderCart();
 }
 
+// ── RENDER CART ──
 function renderCart(){
   const body=document.getElementById('cart-body');
   const empty=document.getElementById('cart-empty');
   const badge=document.getElementById('cbadge');
   const totalEl=document.getElementById('cart-total');
   const wa=document.getElementById('wa-btn');
-  const total_items=cart.reduce((s,i)=>s+i.qty,0);
-  badge.textContent=total_items;
-  badge.classList.toggle('show',total_items>0);
+  const totalItems=cart.reduce((s,i)=>s+i.qty,0);
+  badge.textContent=totalItems;
+  badge.classList.toggle('show',totalItems>0);
   body.querySelectorAll('.cart-item').forEach(e=>e.remove());
   if(cart.length===0){empty.style.display='flex';totalEl.textContent='0';wa.classList.add('disabled');return;}
   empty.style.display='none';wa.classList.remove('disabled');
@@ -499,7 +740,7 @@ function renderCart(){
     const showDetail=item.custom&&item.detail;
     const isPremium=item.price===0;
     const priceDisplay=isPremium?'$ XXX':'$'+(item.price*item.qty).toLocaleString();
-    el.innerHTML=`<div class="ci-info"><div class="ci-name">${item.name}</div>${showDetail?`<div class="ci-detail">${item.detail}</div>`:''}${isPremium?`<div class="ci-detail" style="color:#b8860b;">💬 Precio se indica por WhatsApp</div>`:''}<div class="qty-row"><button class="qty-btn" onclick="chgQty('${item.id}',-1)">−</button><span class="qty-v">${item.qty}</span><button class="qty-btn" onclick="chgQty('${item.id}',1)">+</button></div></div><div style="display:flex;flex-direction:column;align-items:flex-end;gap:4px;"><span class="ci-price" style="${isPremium?'color:#b8860b;font-size:13px;':''}">${priceDisplay}</span><button class="ci-del" onclick="remItem('${item.id}')">🗑</button></div>`;
+    el.innerHTML=`<div class="ci-info"><div class="ci-name">${item.name}</div>${showDetail?`<div class="ci-detail">${item.detail}</div>`:''}${isPremium?`<div class="ci-detail" style="color:#c9a84c;">💬 Precio se indica por WhatsApp</div>`:''}<div class="qty-row"><button class="qty-btn" onclick="chgQty('${item.id}',-1)">−</button><span class="qty-v">${item.qty}</span><button class="qty-btn" onclick="chgQty('${item.id}',1)">+</button></div></div><div style="display:flex;flex-direction:column;align-items:flex-end;gap:4px;"><span class="ci-price" style="${isPremium?'color:#c9a84c;font-size:13px;':''}">${priceDisplay}</span><button class="ci-del" onclick="remItem('${item.id}')">🗑</button></div>`;
     body.appendChild(el);
   });
   const grand=sub+(delivery?100:0);
@@ -515,43 +756,85 @@ function setDel(v){
   document.getElementById('dno').classList.toggle('on',!v);
   renderCart();
 }
-
 function setPago(v){
   pago=v;
   document.getElementById('pcash').classList.toggle('on',v==='Efectivo');
   document.getElementById('ptrans').classList.toggle('on',v==='Transferencia');
 }
 
+// ── SALSA MODAL ──
+function openSalsaModal(){
+  if(cart.length===0) return;
+  modalSalsas=[];
+  document.querySelectorAll('.modal-salsa-row').forEach(r=>r.classList.remove('sel'));
+  document.getElementById('modalConfirmBtn').disabled=true;
+  document.getElementById('salsaModal').classList.add('show');
+}
+
+function togModalSalsa(row, name, price){
+  const idx=modalSalsas.findIndex(s=>s.name===name);
+  if(idx>-1){
+    modalSalsas.splice(idx,1);
+    row.classList.remove('sel');
+  } else {
+    modalSalsas.push({name,price});
+    row.classList.add('sel');
+  }
+  document.getElementById('modalConfirmBtn').disabled=modalSalsas.length===0;
+}
+
+function confirmSalsa(){
+  if(modalSalsas.length===0) return;
+  document.getElementById('salsaModal').classList.remove('show');
+  sendWA();
+}
+
+// ── WHATSAPP ──
 function sendWA(){
   if(cart.length===0){alert('Agrega items al carrito primero');return;}
-  const name=document.getElementById('cname').value.trim()||'Sin nombre';
+  const nameVal=document.getElementById('cname').value.trim();
+  if(!nameVal){
+    document.getElementById('cname').style.borderColor='var(--red)';
+    document.getElementById('cname').placeholder='⚠ El nombre es obligatorio';
+    document.getElementById('cname').focus();
+    return;
+  }
+  document.getElementById('cname').style.borderColor='';
   const sub=cart.reduce((s,i)=>s+(i.price*i.qty),0);
-  const grand=sub+(delivery?100:0);
+  const salsaCost=modalSalsas.reduce((s,x)=>s+x.price,0);
+  const grand=sub+(delivery?100:0)+salsaCost;
+  const nota=document.getElementById('cnota').value.trim();
 
   const lines=cart.map(i=>{
     let l=`• ${i.qty}x ${i.name}`;
-    if(i.custom && i.detail) l+=` (${i.detail})`;
-    l+=i.price===0 ? ` - $ XXX (precio se indica por WhatsApp)` : ` - $${(i.price*i.qty).toLocaleString()}`;
+    if(i.custom&&i.detail) l+=` (${i.detail})`;
+    l+=i.price===0?` - $ XXX (precio se indica por WhatsApp)`:`  - $${(i.price*i.qty).toLocaleString()}`;
     return l;
   });
   if(delivery) lines.push(`• 🛵 Delivery - $100`);
+  if(modalSalsas.length>0){
+    const salsaTexts=modalSalsas.map(s=>s.name+(s.price>0?` (+$${s.price})`:' (Gratis)')).join(', ');
+    lines.push(`• 🥢 Salsas: ${salsaTexts}`);
+  }
 
   const msg=[
     `*NUEVO PEDIDO - SUSHI HOUSE RD*`,
     ``,
-    `👤 *Cliente:* ${name}`,
+    `👤 *Cliente:* ${nameVal}`,
     ``,
     `*ORDEN:*`,
     ...lines,
+    nota?`\n📝 *Nota:* ${nota}`:'',
     ``,
-    pago ? `💳 *Pago:* ${pago}` : '',
+    pago?`💳 *Pago:* ${pago}`:'',
     ``,
     `*TOTAL: $${grand.toLocaleString()}*`
-  ].filter(l=>l!==null).join('\n').trim();
+  ].filter(l=>l!=='').join('\n').trim();
 
   window.open(`https://wa.me/18092401719?text=${encodeURIComponent(msg)}`,'_blank');
 }
 
+// ── INIT ──
 setDel(false);
 </script>
 </body>
