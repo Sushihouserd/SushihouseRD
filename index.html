@@ -381,6 +381,11 @@ header{position:sticky;top:0;z-index:300;background:rgba(8,8,8,0.97);border-bott
         <div class="card-desc">9 rollos rellenos de dip de cangrejo spicy con salsa Fuji, miel y anguila por encima.</div>
         <div class="card-footer"><span class="card-price">$450</span><button class="add-btn">+</button></div>
       </div>
+      <div class="card" onclick="addItem('Wiki Tempura Roll',550,'')">
+        <div class="card-name">Wiki Tempura Roll</div>
+        <div class="card-desc">10 rollos de salmón tempura con plátano maduro y aguacate.</div>
+        <div class="card-footer"><span class="card-price">$550</span><button class="add-btn">+</button></div>
+      </div>
     </div>
   </div>
 
@@ -424,6 +429,11 @@ header{position:sticky;top:0;z-index:300;background:rgba(8,8,8,0.97);border-bott
         <div class="card-desc">9 rollos empanizados rellenos de dip de cangrejo spicy con salsa Fuji, miel y anguila por encima.</div>
         <div class="card-footer"><span class="card-price">$500</span><button class="add-btn">+</button></div>
       </div>
+      <div class="card" onclick="addItem('Wiki Tempura Roll Fried',600,'')">
+        <div class="card-name">Wiki Tempura Roll Fried</div>
+        <div class="card-desc">10 rollos empanizados de salmón tempura con plátano maduro y aguacate.</div>
+        <div class="card-footer"><span class="card-price">$600</span><button class="add-btn">+</button></div>
+      </div>
     </div>
   </div>
 
@@ -462,6 +472,15 @@ header{position:sticky;top:0;z-index:300;background:rgba(8,8,8,0.97);border-bott
             <button class="qty-btn" onclick="chgExtra(1)" style="width:26px;height:26px;background:var(--red);">+</button>
           </div>
         </div>
+      </div>
+
+      <!-- TOPPINGS -->
+      <div class="b-title" style="margin-top:18px;">✨ Toppings</div>
+      <div class="ingr-list" id="custom-toppings">
+        <div class="ingr-row" data-n="Topping: Cangrejo" data-p="150"><div><div class="ingr-name">🦀 Cangrejo</div><div class="ingr-price">+$150</div></div><button class="ingr-tog" onclick="togTopping(this)">+</button></div>
+        <div class="ingr-row" data-n="Topping: Piña Caramelizada" data-p="50"><div><div class="ingr-name">🍍 Piña Caramelizada</div><div class="ingr-price">+$50</div></div><button class="ingr-tog" onclick="togTopping(this)">+</button></div>
+        <div class="ingr-row" data-n="Topping: Bacon Caramelizado" data-p="75"><div><div class="ingr-name">🥓 Bacon Caramelizado</div><div class="ingr-price">+$75</div></div><button class="ingr-tog" onclick="togTopping(this)">+</button></div>
+        <div class="ingr-row" data-n="Topping: Spicy Tuna" data-p="50"><div><div class="ingr-name">🌶 Spicy Tuna</div><div class="ingr-price">+$50</div></div><button class="ingr-tog" onclick="togTopping(this)">+</button></div>
       </div>
       <div class="b-total"><span class="b-total-lbl">Total estimado</span><span class="b-total-val" id="ctotal">$0</span></div>
       <button class="b-add" id="cadd" onclick="addCustom('sushi')" disabled>Selecciona una base primero</button>
@@ -623,7 +642,7 @@ header{position:sticky;top:0;z-index:300;background:rgba(8,8,8,0.97);border-bott
 </div><!-- end layout -->
 
 <script>
-let cart=[], delivery=false, pago='', cBase=null, cBaseP=0, cIngrs=[], bIngrs=[], cExtra=0;
+let cart=[], delivery=false, pago='', cBase=null, cBaseP=0, cIngrs=[], bIngrs=[], cExtra=0, cToppings=[];
 let premiumSel={}; // {id: 'normal'|'fried'}
 let modalSalsas=[]; // array of {name, price}
 
@@ -682,10 +701,19 @@ function togIngr(btn,type){
   if(type==='custom') updateCT(); else updateBT();
 }
 
+function togTopping(btn){
+  const row=btn.closest('.ingr-row');
+  const n=row.dataset.n, p=parseInt(row.dataset.p);
+  const idx=cToppings.findIndex(i=>i.n===n);
+  if(idx>-1){cToppings.splice(idx,1);row.classList.remove('sel');btn.textContent='+';}
+  else{cToppings.push({n,p});row.classList.add('sel');btn.textContent='✓';}
+  updateCT();
+}
+
 function chgExtra(d){cExtra=Math.max(0,cExtra+d);document.getElementById('extra-qty').textContent=cExtra;updateCT();}
 
 function updateCT(){
-  const t=cBaseP+cIngrs.reduce((s,i)=>s+i.p,0)+(cExtra*50);
+  const t=cBaseP+cIngrs.reduce((s,i)=>s+i.p,0)+(cExtra*50)+cToppings.reduce((s,i)=>s+i.p,0);
   document.getElementById('ctotal').textContent='$'+t.toLocaleString();
 }
 
@@ -697,12 +725,14 @@ function updateBT(){
 function addCustom(type){
   if(type==='sushi'){
     if(!cBase){alert('Selecciona una base primero');return;}
-    const t=cBaseP+cIngrs.reduce((s,i)=>s+i.p,0)+(cExtra*50);
+    const t=cBaseP+cIngrs.reduce((s,i)=>s+i.p,0)+(cExtra*50)+cToppings.reduce((s,i)=>s+i.p,0);
     const parts=[cBase,...cIngrs.map(i=>i.n)];
     if(cExtra>0) parts.push(cExtra+'x sushi extra');
+    if(cToppings.length>0) parts.push('toppings: '+cToppings.map(i=>i.n.replace('Topping: ','')).join(', '));
     cart.push({id:Date.now(),name:'Sushi Personalizado',price:t,detail:parts.join(', '),qty:1,custom:true});
-    cBase=null;cBaseP=0;cIngrs=[];cExtra=0;
+    cBase=null;cBaseP=0;cIngrs=[];cExtra=0;cToppings=[];
     document.querySelectorAll('#custom-ingr .ingr-row').forEach(r=>{r.classList.remove('sel');const tog=r.querySelector('.ingr-tog');if(tog)tog.textContent='+';});
+    document.querySelectorAll('#custom-toppings .ingr-row').forEach(r=>{r.classList.remove('sel');r.querySelector('.ingr-tog').textContent='+';});
     document.getElementById('bn').classList.remove('sel');
     document.getElementById('be').classList.remove('sel');
     document.getElementById('ctotal').textContent='$0';
