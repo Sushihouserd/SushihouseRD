@@ -197,6 +197,10 @@ header{position:sticky;top:0;z-index:300;background:rgba(8,8,8,0.97);border-bott
         <div><div style="font-size:13px;font-weight:700;">Sin salsa (solo por encima)</div><div style="font-size:10px;color:#aaa;">—</div></div>
         <div class="modal-check">✓</div>
       </div>
+      <div class="modal-salsa-row" onclick="togModalSalsa(this,'Salsa de Ajo',50)">
+        <div><div style="font-size:13px;font-weight:700;">Salsa de Ajo</div><div style="font-size:10px;color:#aaa;">+$50</div></div>
+        <div class="modal-check">✓</div>
+      </div>
     </div>
     <button class="modal-confirm" id="modalConfirmBtn" onclick="confirmSalsa()" disabled>Confirmar y enviar pedido</button>
   </div>
@@ -450,17 +454,17 @@ header{position:sticky;top:0;z-index:300;background:rgba(8,8,8,0.97);border-bott
       <div class="b-title">Agrega ingredientes</div>
       <div class="ingr-list" id="custom-ingr">
         <div class="ingr-row" style="border-color:#25D366;background:rgba(37,211,102,0.05);"><div><div class="ingr-name" style="color:#25D366;">🌶 Salsa Picante</div><div class="ingr-price" style="color:#25D366;">Gratis</div></div><button class="ingr-tog" onclick="togIngr(this,'custom')" data-free="true" style="border-color:#25D366;color:#25D366;" data-n="Salsa picante" data-p="0">+</button></div>
-        <div class="ingr-row" data-n="Bacon" data-p="50"><div><div class="ingr-name">Bacon</div><div class="ingr-price">+$50</div></div><button class="ingr-tog" onclick="togIngr(this,'custom')">+</button></div>
+        <div class="ingr-row" data-n="Bacon" data-p="70"><div><div class="ingr-name">Bacon</div><div class="ingr-price">+$70</div></div><button class="ingr-tog" onclick="togIngr(this,'custom')">+</button></div>
         <div class="ingr-row" data-n="Plátano maduro" data-p="50"><div><div class="ingr-name">Plátano Maduro</div><div class="ingr-price">+$50</div></div><button class="ingr-tog" onclick="togIngr(this,'custom')">+</button></div>
         <div class="ingr-row" data-n="Pollo" data-p="100"><div><div class="ingr-name">Pollo</div><div class="ingr-price">+$100</div></div><button class="ingr-tog" onclick="togIngr(this,'custom')">+</button></div>
         <div class="ingr-row" data-n="Carne Angus" data-p="100"><div><div class="ingr-name">Carne Angus</div><div class="ingr-price">+$100</div></div><button class="ingr-tog" onclick="togIngr(this,'custom')">+</button></div>
-        <div class="ingr-row" data-n="Camarones" data-p="150"><div><div class="ingr-name">Camarones</div><div class="ingr-price">+$150</div></div><button class="ingr-tog" onclick="togIngr(this,'custom')">+</button></div>
-        <div class="ingr-row" data-n="Camarón Tempura" data-p="200"><div><div class="ingr-name">Camarón Tempura</div><div class="ingr-price">+$200</div></div><button class="ingr-tog" onclick="togIngr(this,'custom')">+</button></div>
-        <div class="ingr-row" data-n="Cangrejo" data-p="150"><div><div class="ingr-name">Cangrejo</div><div class="ingr-price">+$150</div></div><button class="ingr-tog" onclick="togIngr(this,'custom')">+</button></div>
+        <div class="ingr-row" data-n="Camarones" data-p="200"><div><div class="ingr-name">Camarones</div><div class="ingr-price">+$200</div></div><button class="ingr-tog" onclick="togIngr(this,'custom')">+</button></div>
+        <div class="ingr-row" data-n="Camarón Tempura" data-p="250"><div><div class="ingr-name">Camarón Tempura</div><div class="ingr-price">+$250</div></div><button class="ingr-tog" onclick="togIngr(this,'custom')">+</button></div>
+        <div class="ingr-row" data-n="Cangrejo" data-p="200"><div><div class="ingr-name">Cangrejo</div><div class="ingr-price">+$200</div></div><button class="ingr-tog" onclick="togIngr(this,'custom')">+</button></div>
         <div class="ingr-row" data-n="Salmón" data-p="200"><div><div class="ingr-name">Salmón</div><div class="ingr-price">+$200</div></div><button class="ingr-tog" onclick="togIngr(this,'custom')">+</button></div>
         <div class="ingr-row" data-n="Salmón Empanizado" data-p="250"><div><div class="ingr-name">Salmón Empanizado</div><div class="ingr-price">+$250</div></div><button class="ingr-tog" onclick="togIngr(this,'custom')">+</button></div>
         <div class="ingr-row" data-n="Queso Crema" data-p="50"><div><div class="ingr-name">Queso Crema</div><div class="ingr-price">+$50</div></div><button class="ingr-tog" onclick="togIngr(this,'custom')">+</button></div>
-        <div class="ingr-row" data-n="Queso de Cabra" data-p="75"><div><div class="ingr-name">Queso de Cabra</div><div class="ingr-price">+$75</div></div><button class="ingr-tog" onclick="togIngr(this,'custom')">+</button></div>
+        <div class="ingr-row" data-n="Queso de Cabra" data-p="100"><div><div class="ingr-name">Queso de Cabra</div><div class="ingr-price">+$100</div></div><button class="ingr-tog" onclick="togIngr(this,'custom')">+</button></div>
         <div class="ingr-row" data-n="Pepino" data-p="25"><div><div class="ingr-name">Pepino</div><div class="ingr-price">+$25</div></div><button class="ingr-tog" onclick="togIngr(this,'custom')">+</button></div>
         <div class="ingr-row" data-n="Zanahoria" data-p="25"><div><div class="ingr-name">Zanahoria</div><div class="ingr-price">+$25</div></div><button class="ingr-tog" onclick="togIngr(this,'custom')">+</button></div>
         <div class="ingr-row" data-n="Aguacate" data-p="50"><div><div class="ingr-name">Aguacate</div><div class="ingr-price">+$50</div></div><button class="ingr-tog" onclick="togIngr(this,'custom')">+</button></div>
@@ -478,9 +482,9 @@ header{position:sticky;top:0;z-index:300;background:rgba(8,8,8,0.97);border-bott
       <div class="b-title" style="margin-top:18px;">✨ Toppings</div>
       <div class="ingr-list" id="custom-toppings">
         <div class="ingr-row" data-n="Topping: Cangrejo" data-p="150"><div><div class="ingr-name">🦀 Cangrejo</div><div class="ingr-price">+$150</div></div><button class="ingr-tog" onclick="togTopping(this)">+</button></div>
-        <div class="ingr-row" data-n="Topping: Piña Caramelizada" data-p="50"><div><div class="ingr-name">🍍 Piña Caramelizada</div><div class="ingr-price">+$50</div></div><button class="ingr-tog" onclick="togTopping(this)">+</button></div>
-        <div class="ingr-row" data-n="Topping: Bacon Caramelizado" data-p="75"><div><div class="ingr-name">🥓 Bacon Caramelizado</div><div class="ingr-price">+$75</div></div><button class="ingr-tog" onclick="togTopping(this)">+</button></div>
-        <div class="ingr-row" data-n="Topping: Spicy Tuna" data-p="50"><div><div class="ingr-name">🌶 Spicy Tuna</div><div class="ingr-price">+$50</div></div><button class="ingr-tog" onclick="togTopping(this)">+</button></div>
+        <div class="ingr-row" data-n="Topping: Piña Caramelizada" data-p="100"><div><div class="ingr-name">🍍 Piña Caramelizada</div><div class="ingr-price">+$100</div></div><button class="ingr-tog" onclick="togTopping(this)">+</button></div>
+        <div class="ingr-row" data-n="Topping: Bacon Caramelizado" data-p="100"><div><div class="ingr-name">🥓 Bacon Caramelizado</div><div class="ingr-price">+$100</div></div><button class="ingr-tog" onclick="togTopping(this)">+</button></div>
+        <div class="ingr-row" data-n="Topping: Spicy Tuna" data-p="70"><div><div class="ingr-name">🌶 Spicy Tuna</div><div class="ingr-price">+$70</div></div><button class="ingr-tog" onclick="togTopping(this)">+</button></div>
       </div>
       <div class="b-total"><span class="b-total-lbl">Total estimado</span><span class="b-total-val" id="ctotal">$0</span></div>
       <button class="b-add" id="cadd" onclick="addCustom('sushi')" disabled>Selecciona una base primero</button>
